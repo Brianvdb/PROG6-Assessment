@@ -19,9 +19,23 @@ namespace PROG6_Assessment
     /// </summary>
     public partial class ShoppingList : Window
     {
+        private static Window instance;
+
         public ShoppingList()
         {
             InitializeComponent();
+        }
+
+        public static Window Instance
+        {
+            get
+            {
+                if (instance == null || !instance.IsVisible)
+                {
+                    instance = new ShoppingList();
+                }
+                return instance;
+            }
         }
     }
 }

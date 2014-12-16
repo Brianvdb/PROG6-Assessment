@@ -1,6 +1,9 @@
 using DomainModel.Interfaces;
 using DomainModel.Model;
 using GalaSoft.MvvmLight;
+using GalaSoft.MvvmLight.CommandWpf;
+using System;
+using System.Windows.Input;
 
 namespace PROG6_Assessment.ViewModel
 {
@@ -22,6 +25,7 @@ namespace PROG6_Assessment.ViewModel
         private IRepository<Department> departmentRepository;
         private IRepository<Discount> discountRepository;
         private IRepository<Product> productRepository;
+        public ICommand OpenShoppingList { get; set; }
 
         public AppieViewModel(IRepository<Brand> brandRepo, IRepository<Department> departmentRepo, IRepository<Discount> discountRepo, IRepository<Product> productRepo)
         {
@@ -29,6 +33,13 @@ namespace PROG6_Assessment.ViewModel
             this.departmentRepository = departmentRepo;
             this.discountRepository = discountRepo;
             this.productRepository = productRepo;
+
+            this.OpenShoppingList = new RelayCommand(OpenShoppingWindow);
+        }
+
+        private void OpenShoppingWindow()
+        {
+            ShoppingList.Instance.Show();
         }
     }
 }
