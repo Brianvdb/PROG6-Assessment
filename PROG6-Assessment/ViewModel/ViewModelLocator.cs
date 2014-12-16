@@ -52,6 +52,14 @@ namespace PROG6_Assessment.ViewModel
                 return ServiceLocator.Current.GetInstance<MainViewModel>();
             }
         }
+
+        public ShoppingListViewModel ShoppingList
+        {
+            get
+            {
+                return ServiceLocator.Current.GetInstance<ShoppingListViewModel>();
+            }
+        }
         
         public static void Cleanup()
         {
