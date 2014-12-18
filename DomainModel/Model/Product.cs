@@ -14,8 +14,11 @@ namespace DomainModel.Model
         public int Id { get; set; }
 
         public string ProductName { get; set; }
-        
-        public string ProductType { get; set; }
+
+        public int ProductTypeId { get; set; }
+
+        [ForeignKey("ProductTypeId")]
+        public virtual ProductType ProductType { get; set; }
 
         public double Price { get; set; }
 
@@ -23,7 +26,7 @@ namespace DomainModel.Model
 
         public int DepartmentId { get; set; }
 
-        [ForeignKey("Department")]
+        [ForeignKey("DepartmentId")]
         public virtual Department Department { get; set; }
 
         [ForeignKey("BrandId")]

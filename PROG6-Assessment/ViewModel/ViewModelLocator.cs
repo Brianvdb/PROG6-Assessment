@@ -51,6 +51,7 @@ namespace PROG6_Assessment.ViewModel
             SimpleIoc.Default.Register<IRepository<Department>, DepartmentEntityRepository>();
             SimpleIoc.Default.Register<IRepository<Discount>, DiscountEntityRepository>();
             SimpleIoc.Default.Register<IRepository<Product>, ProductEntityRepository>();
+            SimpleIoc.Default.Register<IRepository<ProductType>, ProductTypeEntityRepository>();
             SimpleIoc.Default.Register<AppieViewModel>();
         }
 
