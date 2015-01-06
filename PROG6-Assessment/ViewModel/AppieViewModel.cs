@@ -26,15 +26,17 @@ namespace PROG6_Assessment.ViewModel
         private IRepository<Discount> discountRepository;
         private IRepository<Product> productRepository;
         private IRepository<ProductType> productTypeRepository;
+        private IRepository<Recipe> recipeRepository;
         public ICommand OpenShoppingList { get; set; }
 
-        public AppieViewModel(IRepository<Brand> brandRepo, IRepository<Department> departmentRepo, IRepository<Discount> discountRepo, IRepository<Product> productRepo, IRepository<ProductType> productTypeRepo)
+        public AppieViewModel(IRepository<Brand> brandRepo, IRepository<Department> departmentRepo, IRepository<Discount> discountRepo, IRepository<Product> productRepo, IRepository<ProductType> productTypeRepo, IRepository<Recipe> recipeRepo)
         {
             this.brandRepository = brandRepo;
             this.departmentRepository = departmentRepo;
             this.discountRepository = discountRepo;
             this.productRepository = productRepo;
             this.productTypeRepository = productTypeRepo;
+            this.recipeRepository = recipeRepo;
 
             this.OpenShoppingList = new RelayCommand(OpenShoppingWindow);
         }
