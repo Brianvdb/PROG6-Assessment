@@ -78,6 +78,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Model\DummyProductRepository.cs" />
     <Compile Include="ShoppingList.xaml.cs">
       <DependentUpon>ShoppingList.xaml</DependentUpon>
     </Compile>
