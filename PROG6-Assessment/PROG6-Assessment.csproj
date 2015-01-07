@@ -81,6 +81,9 @@
     <Compile Include="BasicEdit.xaml.cs">
       <DependentUpon>BasicEdit.xaml</DependentUpon>
     </Compile>
+    <Compile Include="BrandEdit.xaml.cs">
+      <DependentUpon>BrandEdit.xaml</DependentUpon>
+    </Compile>
     <Compile Include="BrandList.xaml.cs">
       <DependentUpon>BrandList.xaml</DependentUpon>
     </Compile>
@@ -120,6 +123,10 @@
     <Page Include="BasicEdit.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="BrandEdit.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="BrandList.xaml">
       <SubType>Designer</SubType>

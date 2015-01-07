@@ -12,8 +12,9 @@
             </DataGrid.Columns>
         </DataGrid>
         <StackPanel DockPanel.Dock="Bottom">
-            <Button>Merk Bewerken</Button>
-            <Button>Merk Toevoegen</Button>
+            <Button Command="{Binding OpenBrandEditAdd}">Merk Toevoegen</Button>
+            <Button Command="{Binding OpenBrandEdit}">Merk Bewerken</Button>
+            <Button Command="{Binding DeleteBrandCommand}">Merk Verwijderen</Button>
         </StackPanel>
     </DockPanel>
 </Window>

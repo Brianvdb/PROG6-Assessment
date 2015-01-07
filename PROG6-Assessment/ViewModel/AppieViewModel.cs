@@ -47,6 +47,10 @@ namespace PROG6_Assessment.ViewModel
         public ICommand AddMoreToShoppingListCommand { get; set; }
         public ICommand AddLessToShoppingListCommand { get; set; }
         public ICommand ClearShoppingListCommand { get; set; }
+        public ICommand SaveBrandCommand { get; set; }
+        public ICommand OpenBrandEdit { get; set; }
+        public ICommand OpenBrandEditAdd { get; set; }
+        public ICommand DeleteBrandCommand { get; set; }
 
         // view models
         private ProductTypeVM _productType;
@@ -149,6 +153,11 @@ namespace PROG6_Assessment.ViewModel
             this.AddMoreToShoppingListCommand = new RelayCommand(AddMoreToShoppingList);
             this.AddLessToShoppingListCommand = new RelayCommand(AddLessToShoppingList);
             this.ClearShoppingListCommand = new RelayCommand(ClearShoppingList);
+            this.SaveBrandCommand = new RelayCommand<string>(name => SaveBrand(name));
+            this.OpenBrandEdit = new RelayCommand(OpenBrandEditWindow);
+            this.OpenBrandEditAdd = new RelayCommand(OpenBrandAddWindow);
+            this.DeleteBrandCommand = new RelayCommand(DeleteBrand);
+
 
             // observable collections
             this.ProductTypeVMList = new ObservableCollection<ProductTypeVM>();
@@ -194,6 +203,33 @@ namespace PROG6_Assessment.ViewModel
             };
 
             this.productRepository.Add(product);*/
+        }
+
+        private void DeleteBrand()
+        {
+            if (CurrentBrand != null && !CurrentBrand.IsNew)
+            {
+                this.brandRepository.Delete(CurrentBrand.Brand);
+                BrandVMList.Remove(CurrentBrand);
+                CurrentBrand = null;
+            }
+        }
+
+        private void SaveBrand(string name)
+        {
+            CurrentBrand.Name = name;
+            if (CurrentBrand.IsNew)
+            {
+                this.brandRepository.Add(CurrentBrand.Brand);
+                CurrentBrand.IsNew = false;
+                BrandVMList.Add(CurrentBrand);
+            }
+            else
+            {
+                this.brandRepository.Update();
+            }
+            BrandEdit.Instance.Close();
+            OpenBrandWindow();
         }
 
         private void ClearShoppingList()
@@ -282,6 +318,7 @@ namespace PROG6_Assessment.ViewModel
             if (CurrentProductType.IsNew)
             {
                 this.productTypeRepository.Add(CurrentProductType.ProductType);
+                CurrentProductType.IsNew = false;
                 ProductTypeVMList.Add(CurrentProductType);
             }
             else
@@ -294,7 +331,7 @@ namespace PROG6_Assessment.ViewModel
 
         private void DeleteProductType()
         {
-            if (!CurrentProductType.IsNew)
+            if (CurrentProductType != null && !CurrentProductType.IsNew)
             {
                 this.productTypeRepository.Delete(CurrentProductType.ProductType);
                 ProductTypeVMList.Remove(CurrentProductType);
@@ -310,6 +347,24 @@ namespace PROG6_Assessment.ViewModel
             }
             ProductTypeList.Instance.Close();
             ProductTypeEdit.Instance.Show();
+        }
+
+        private void OpenBrandAddWindow()
+        {
+            Trace.WriteLine("ADD");
+            CurrentBrand = new BrandVM();
+            OpenBrandEditWindow();
+        }
+
+        private void OpenBrandEditWindow()
+        {
+            Trace.WriteLine("EDIT");
+            if (CurrentBrand == null)
+            {
+                return;
+            }
+            BrandList.Instance.Close();
+            BrandEdit.Instance.Show();
         }
     }
 }
