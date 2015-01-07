@@ -91,6 +91,20 @@ namespace PROG6_Assessment.ViewModel
             }
         }
 
+        private BrandVM _brand;
+        public BrandVM CurrentBrand
+        {
+            get
+            {
+                return _brand;
+            }
+            set
+            {
+                _brand = value;
+                RaisePropertyChanged();
+            }
+        }
+
         public double ShoppingListPrice
         {
             get
@@ -107,6 +121,7 @@ namespace PROG6_Assessment.ViewModel
         public ObservableCollection<ProductTypeVM> ProductTypeVMList { get; set; }
         public ObservableCollection<ProductVM> ProductVMList { get; set; }
         public ObservableCollection<ProductVM> ProductShoppingVMList { get; set; }
+        public ObservableCollection<BrandVM> BrandVMList { get; set; }
 
         public AppieViewModel(IRepository<Brand> brandRepo, IRepository<Department> departmentRepo, IRepository<Discount> discountRepo, IRepository<Product> productRepo, IRepository<ProductType> productTypeRepo, IRepository<Recipe> recipeRepo)
         {
@@ -139,9 +154,11 @@ namespace PROG6_Assessment.ViewModel
             this.ProductTypeVMList = new ObservableCollection<ProductTypeVM>();
             this.ProductVMList = new ObservableCollection<ProductVM>();
             this.ProductShoppingVMList = new ObservableCollection<ProductVM>();
+            this.BrandVMList = new ObservableCollection<BrandVM>();
 
             this.productTypeRepository.GetAll().ForEach(p => ProductTypeVMList.Add(new ProductTypeVM(p)));
             this.productRepository.GetAll().ForEach(p => ProductVMList.Add(new ProductVM(p)));
+            this.brandRepository.GetAll().ForEach(b => BrandVMList.Add(new BrandVM(b)));
 
             //Trace.WriteLine("PRODUCT TYPES: " + ProductTypeVMList.Count);
 
