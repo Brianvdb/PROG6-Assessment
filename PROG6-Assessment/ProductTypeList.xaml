@@ -1,0 +1,18 @@
+﻿<Window x:Class="PROG6_Assessment.ProductTypeList"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="ProductTypeList" Height="300" Width="300">
+    <DockPanel>
+        <TextBlock DockPanel.Dock="Top" Text="Appie Producttypen" FontSize="28" TextAlignment="Center"/>
+        <DataGrid DockPanel.Dock="Top" AutoGenerateColumns="False" IsReadOnly="True" Margin="5">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="id" Width="20" />
+                <DataGridTextColumn Header="Product Type Naam" Width="*" />
+            </DataGrid.Columns>
+        </DataGrid>
+        <StackPanel DockPanel.Dock="Bottom">
+            <Button>Product Type Bewerken</Button>
+            <Button>Product Type Toevoegen</Button>
+        </StackPanel>
+    </DockPanel>
+</Window>

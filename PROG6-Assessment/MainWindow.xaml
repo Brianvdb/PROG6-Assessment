@@ -4,11 +4,12 @@
         Title="Appie" Height="350" Width="200"
         DataContext="{Binding Source={StaticResource Locator}, Path=Appie}">
     <StackPanel>
-        <Button Command="{Binding OpenShoppingList}" Width="150" Margin="0,5,5,0">Boodschappenlijstje</Button>
-        <Button Command="{Binding OpenBrandList}" Width="150" Margin="0,5,5,0">Merken</Button>
-        <Button Command="{Binding OpenProductList}" Width="150" Margin="0,5,5,0">Producten</Button>
-        <Button Command="{Binding OpenDepartmentList}" Width="150" Margin="0,5,5,0">Afdelingen</Button>
-        <Button Command="{Binding OpenRecipeList}" Width="150" Margin="0,5,5,0">Recepten</Button>
-        <Button Command="{Binding OpenDiscountList}" Width="150" Margin="0,5,5,0">Kortingen</Button>
+        <Button Command="{Binding OpenShoppingList}">Boodschappenlijstje</Button>
+        <Button Command="{Binding OpenBrandList}">Merken</Button>
+        <Button Command="{Binding OpenProductList}">Producten</Button>
+        <Button Command="{Binding OpenProductTypeList}">Product Types</Button>
+        <Button Command="{Binding OpenDepartmentList}">Afdelingen</Button>
+        <Button Command="{Binding OpenRecipeList}">Recepten</Button>
+        <Button Command="{Binding OpenDiscountList}">Kortingen</Button>
     </StackPanel>
 </Window>

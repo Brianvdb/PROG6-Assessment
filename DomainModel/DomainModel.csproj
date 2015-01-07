@@ -53,6 +53,7 @@
     <Compile Include="Model\Discount.cs" />
     <Compile Include="Model\Product.cs" />
     <Compile Include="Model\ProductType.cs" />
+    <Compile Include="Model\Recipe.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repositories\BrandEntityRepository.cs" />
     <Compile Include="Repositories\DepartmentEntityRepository.cs" />
@@ -60,6 +61,7 @@
     <Compile Include="Repositories\EntityRepository.cs" />
     <Compile Include="Repositories\ProductEntityRepository.cs" />
     <Compile Include="Repositories\ProductTypeEntityRepository.cs" />
+    <Compile Include="Repositories\RecipeEntityRepository.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

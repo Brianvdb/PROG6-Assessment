@@ -1,0 +1,8 @@
+﻿<Window x:Class="PROG6_Assessment.DiscountEdit"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="DiscountEdit" Height="300" Width="300">
+    <Grid>
+        
+    </Grid>
+</Window>

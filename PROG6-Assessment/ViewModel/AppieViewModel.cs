@@ -26,14 +26,16 @@ namespace PROG6_Assessment.ViewModel
         private IRepository<Discount> discountRepository;
         private IRepository<Product> productRepository;
         private IRepository<ProductType> productTypeRepository;
+        private IRepository<Recipe> recipeRepository;
         public ICommand OpenShoppingList { get; set; }
         public ICommand OpenBrandList { get; set; }
         public ICommand OpenProductList { get; set; }
         public ICommand OpenDepartmentList { get; set; }
         public ICommand OpenRecipeList { get; set; }
         public ICommand OpenDiscountList { get; set; }
+        public ICommand OpenProductTypeList { get; set; }
 
-        public AppieViewModel(IRepository<Brand> brandRepo, IRepository<Department> departmentRepo, IRepository<Discount> discountRepo, IRepository<Product> productRepo, IRepository<ProductType> productTypeRepo)
+        public AppieViewModel(IRepository<Brand> brandRepo, IRepository<Department> departmentRepo, IRepository<Discount> discountRepo, IRepository<Product> productRepo, IRepository<ProductType> productTypeRepo, IRepository<Recipe> recipeRepo)
         {
             //setup sql model data
             this.brandRepository = brandRepo;
@@ -41,6 +43,7 @@ namespace PROG6_Assessment.ViewModel
             this.discountRepository = discountRepo;
             this.productRepository = productRepo;
             this.productTypeRepository = productTypeRepo;
+            this.recipeRepository = recipeRepo;
 
             //bind actions to buttons
             this.OpenShoppingList = new RelayCommand(OpenShoppingWindow);
@@ -49,6 +52,7 @@ namespace PROG6_Assessment.ViewModel
             this.OpenRecipeList = new RelayCommand(OpenRecipeWindow);
             this.OpenDepartmentList = new RelayCommand(OpenDepartmentWindow);
             this.OpenDiscountList = new RelayCommand(OpenDiscountWindow);
+            this.OpenProductTypeList = new RelayCommand(OpenProductTypeWindow);
         }
 
         private void OpenShoppingWindow()
@@ -73,12 +77,17 @@ namespace PROG6_Assessment.ViewModel
 
         private void OpenDepartmentWindow()
         {
-            ShoppingList.Instance.Show();
+            DepartmentList.Instance.Show();
         }
 
         private void OpenDiscountWindow()
         {
             DiscountList.Instance.Show();
+        }
+
+        private void OpenProductTypeWindow()
+        {
+            ProductTypeList.Instance.Show();
         }
     }
 }

@@ -16,7 +16,7 @@
         <StackPanel DockPanel.Dock="Bottom">
             <Button>Meer van dit product</Button>
             <Button>Minder van dit product</Button>
-            <Button Margin="0,20,0,0" Background="Red" Foreground="White" >Winkelwagen leeg maken</Button>
+            <Button Margin="0,20,0,0" Background="Red" Foreground="White" >Winkelwagen legen</Button>
             <Button>Winkelwagen opslaan als recept</Button>
         </StackPanel>
         <TextBlock DockPanel.Dock="Bottom" Text="Totaalprijs: " FontSize="14" Padding="5,0,0,0"/>

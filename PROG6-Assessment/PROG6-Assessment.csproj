@@ -84,15 +84,25 @@
     <Compile Include="DepartmentList.xaml.cs">
       <DependentUpon>DepartmentList.xaml</DependentUpon>
     </Compile>
+    <Compile Include="DiscountEdit.xaml.cs">
+      <DependentUpon>DiscountEdit.xaml</DependentUpon>
+    </Compile>
     <Compile Include="DiscountList.xaml.cs">
       <DependentUpon>DiscountList.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ProductEdit.xaml.cs">
+      <DependentUpon>ProductEdit.xaml</DependentUpon>
     </Compile>
     <Compile Include="ProductList.xaml.cs">
       <DependentUpon>ProductList.xaml</DependentUpon>
     </Compile>
+    <Compile Include="ProductTypeList.xaml.cs">
+      <DependentUpon>ProductTypeList.xaml</DependentUpon>
+    </Compile>
     <Compile Include="RecipeList.xaml.cs">
       <DependentUpon>RecipeList.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Model\DummyProductRepository.cs" />
     <Compile Include="ShoppingList.xaml.cs">
       <DependentUpon>ShoppingList.xaml</DependentUpon>
     </Compile>
@@ -105,6 +115,10 @@
     <Page Include="DepartmentList.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="DiscountEdit.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="DiscountList.xaml">
       <SubType>Designer</SubType>
@@ -122,9 +136,17 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="ProductEdit.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="ProductList.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="ProductTypeList.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="RecipeList.xaml">
       <SubType>Designer</SubType>
