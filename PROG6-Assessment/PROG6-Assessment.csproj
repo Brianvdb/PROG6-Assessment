@@ -78,11 +78,38 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="BrandList.xaml.cs">
+      <DependentUpon>BrandList.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="DepartmentList.xaml.cs">
+      <DependentUpon>DepartmentList.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="DiscountList.xaml.cs">
+      <DependentUpon>DiscountList.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ProductList.xaml.cs">
+      <DependentUpon>ProductList.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="RecipeList.xaml.cs">
+      <DependentUpon>RecipeList.xaml</DependentUpon>
+    </Compile>
     <Compile Include="ShoppingList.xaml.cs">
       <DependentUpon>ShoppingList.xaml</DependentUpon>
     </Compile>
     <Compile Include="ViewModel\AppieViewModel.cs" />
     <Compile Include="ViewModel\ViewModelLocator.cs" />
+    <Page Include="BrandList.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="DepartmentList.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="DiscountList.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -95,6 +122,14 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="ProductList.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="RecipeList.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="ShoppingList.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
