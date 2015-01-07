@@ -113,6 +113,7 @@
       <DependentUpon>ShoppingList.xaml</DependentUpon>
     </Compile>
     <Compile Include="ViewModel\AppieViewModel.cs" />
+    <Compile Include="ViewModel\BrandVM.cs" />
     <Compile Include="ViewModel\ProductTypeVM.cs" />
     <Compile Include="ViewModel\ProductVM.cs" />
     <Compile Include="ViewModel\ViewModelLocator.cs" />

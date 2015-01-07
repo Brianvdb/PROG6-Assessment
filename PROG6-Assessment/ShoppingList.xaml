@@ -5,20 +5,21 @@
         DataContext="{Binding Source={StaticResource Locator}, Path=Appie}">
     <DockPanel>
         <TextBlock DockPanel.Dock="Top" Text="Appie Winkelwagen" FontSize="28" TextAlignment="Center"/>
-        <DataGrid DockPanel.Dock="Top" AutoGenerateColumns="False" IsReadOnly="True" Margin="5">
+        <DataGrid DockPanel.Dock="Top" AutoGenerateColumns="False" IsReadOnly="True" Margin="5" ItemsSource="{Binding ProductShoppingVMList}" SelectedItem="{Binding CurrentShopListProduct}">
             <DataGrid.Columns>
-                <DataGridTextColumn Header="Merk" Width="300" />
-                <DataGridTextColumn Header="Aantal" Width="50" />
-                <DataGridTextColumn Header="Prijs" Width="*" />
-                <DataGridTextColumn Header="Korting" Width="*" />
+                <DataGridTextColumn Header="Productnaam" Width="200" Binding="{Binding ProductName}"/>
+                <DataGridTextColumn Header="Merk" Width="100" Binding="{Binding Brand.Name}"/>
+                <DataGridTextColumn Header="Aantal" Width="50" Binding="{Binding Amount}"/>
+                <DataGridTextColumn Header="Prijs" Width="*" Binding="{Binding TotalPriceWithDiscount}"/>
+                <DataGridTextColumn Header="Korting" Width="*" Binding="{Binding CurrentDiscount}"/>
             </DataGrid.Columns>
         </DataGrid>
         <StackPanel DockPanel.Dock="Bottom">
-            <Button>Meer van dit product</Button>
-            <Button>Minder van dit product</Button>
-            <Button Margin="0,20,0,0" Background="Red" Foreground="White" >Winkelwagen legen</Button>
+            <Button Command="{Binding AddMoreToShoppingListCommand}">Meer van dit product</Button>
+            <Button Command="{Binding AddLessToShoppingListCommand}">Minder van dit product</Button>
+            <Button Margin="0,20,0,0" Background="Red" Foreground="White" Command="{Binding ClearShoppingListCommand}">Winkelwagen legen</Button>
             <Button>Winkelwagen opslaan als recept</Button>
         </StackPanel>
-        <TextBlock DockPanel.Dock="Bottom" Text="Totaalprijs: " FontSize="14" Padding="5,0,0,0"/>
+        <TextBlock DockPanel.Dock="Bottom" Text="{Binding Path=ShoppingListPrice, StringFormat=Totaalprijs: {0}}" FontSize="14" Padding="5,0,0,0"/>
     </DockPanel>
 </Window>

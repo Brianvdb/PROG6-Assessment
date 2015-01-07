@@ -4,6 +4,7 @@ using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.CommandWpf;
 using System;
 using System.Collections.ObjectModel;
+using System.Diagnostics;
 using System.Windows.Input;
 
 namespace PROG6_Assessment.ViewModel
@@ -42,6 +43,10 @@ namespace PROG6_Assessment.ViewModel
         public ICommand OpenProductTypeEditAdd { get; set; }
         public ICommand SaveProductTypeCommand { get; set; }
         public ICommand DeleteProductTypeCommand { get; set; }
+        public ICommand AddToShoppingListCommand { get; set; }
+        public ICommand AddMoreToShoppingListCommand { get; set; }
+        public ICommand AddLessToShoppingListCommand { get; set; }
+        public ICommand ClearShoppingListCommand { get; set; }
 
         // view models
         private ProductTypeVM _productType;
@@ -58,7 +63,50 @@ namespace PROG6_Assessment.ViewModel
             }
         }
 
+        private ProductVM _currentListProduct;
+        public ProductVM CurrentListProduct
+        {
+            get
+            {
+                return _currentListProduct;
+            }
+            set
+            {
+                _currentListProduct = value;
+                RaisePropertyChanged();
+            }
+        }
+
+        private ProductVM _currentShopListProduct;
+        public ProductVM CurrentShopListProduct
+        {
+            get
+            {
+                return _currentShopListProduct;
+            }
+            set
+            {
+                _currentShopListProduct = value;
+                RaisePropertyChanged();
+            }
+        }
+
+        public double ShoppingListPrice
+        {
+            get
+            {
+                double totalPrice = 0;
+                foreach (ProductVM product in ProductShoppingVMList)
+                {
+                    totalPrice += product.TotalPriceWithDiscount;
+                }
+                return totalPrice;
+            }
+        }
+
         public ObservableCollection<ProductTypeVM> ProductTypeVMList { get; set; }
+        public ObservableCollection<ProductVM> ProductVMList { get; set; }
+        public ObservableCollection<ProductVM> ProductShoppingVMList { get; set; }
 
         public AppieViewModel(IRepository<Brand> brandRepo, IRepository<Department> departmentRepo, IRepository<Discount> discountRepo, IRepository<Product> productRepo, IRepository<ProductType> productTypeRepo, IRepository<Recipe> recipeRepo)
         {
@@ -82,13 +130,92 @@ namespace PROG6_Assessment.ViewModel
             this.OpenProductTypeEditAdd = new RelayCommand(OpenProductTypeListAddWindow);
             this.SaveProductTypeCommand = new RelayCommand<string>(name => SaveProductType(name));
             this.DeleteProductTypeCommand = new RelayCommand(DeleteProductType);
+            this.AddToShoppingListCommand = new RelayCommand(AddProductToShoppingList);
+            this.AddMoreToShoppingListCommand = new RelayCommand(AddMoreToShoppingList);
+            this.AddLessToShoppingListCommand = new RelayCommand(AddLessToShoppingList);
+            this.ClearShoppingListCommand = new RelayCommand(ClearShoppingList);
 
             // observable collections
             this.ProductTypeVMList = new ObservableCollection<ProductTypeVM>();
+            this.ProductVMList = new ObservableCollection<ProductVM>();
+            this.ProductShoppingVMList = new ObservableCollection<ProductVM>();
 
             this.productTypeRepository.GetAll().ForEach(p => ProductTypeVMList.Add(new ProductTypeVM(p)));
+            this.productRepository.GetAll().ForEach(p => ProductVMList.Add(new ProductVM(p)));
 
-            System.Diagnostics.Trace.WriteLine("PRODUCT TYPES: " + ProductTypeVMList.Count);
+            //Trace.WriteLine("PRODUCT TYPES: " + ProductTypeVMList.Count);
+
+            /*
+             * DUMMY DATA PRODUCT (ja was te lui voor dummy repository)
+             * 
+            Brand brand = new Brand()
+            {
+                Name = "Unilever"
+            };
+
+            Department dep = new Department() {
+                Name = "Kaas Afdeling"
+            };
+
+            ProductType type = new ProductType() {
+                Name = "Kaas"
+            };
+
+            this.brandRepository.Add(brand);
+            this.departmentRepository.Add(dep);
+            this.productTypeRepository.Add(type);
+            
+            Product product = new Product()
+            {
+                ProductName = "Lekkere kaas",
+                Brand = brand,
+                Department = dep,
+                Price = 80,
+                ProductType = type
+                  
+                  
+            };
+
+            this.productRepository.Add(product);*/
+        }
+
+        private void ClearShoppingList()
+        {
+            CurrentShopListProduct = null;
+            ProductShoppingVMList.Clear();
+            RaisePropertyChanged("ShoppingListPrice");
+        }
+
+        private void AddMoreToShoppingList()
+        {
+            if (CurrentShopListProduct != null && ProductShoppingVMList.Contains(CurrentShopListProduct))
+            {
+                CurrentShopListProduct.Amount += 1;
+                RaisePropertyChanged("ShoppingListPrice");
+            } 
+        }
+
+        private void AddLessToShoppingList()
+        {
+            if (CurrentShopListProduct != null && ProductShoppingVMList.Contains(CurrentShopListProduct))
+            {
+                CurrentShopListProduct.Amount -= 1;
+                if (CurrentShopListProduct.Amount == 0)
+                {
+                    ProductShoppingVMList.Remove(CurrentShopListProduct);
+                    CurrentShopListProduct = null;
+                }
+                RaisePropertyChanged("ShoppingListPrice");
+            }
+        }
+
+        private void AddProductToShoppingList()
+        {
+            if (CurrentListProduct != null && !ProductShoppingVMList.Contains(CurrentListProduct))
+            {
+                ProductShoppingVMList.Add(CurrentListProduct);
+                RaisePropertyChanged("ShoppingListPrice");
+            }
         }
 
         private void OpenShoppingWindow()

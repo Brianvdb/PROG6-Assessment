@@ -21,10 +21,6 @@ namespace PROG6_Assessment.ViewModel
             {
                 return _productType.Id;
             }
-            set
-            {
-                
-            }
         }
 
         public string Name

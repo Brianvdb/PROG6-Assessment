@@ -1,7 +1,8 @@
 ﻿<Window x:Class="PROG6_Assessment.Products"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="Producten" Height="300" Width="500">
+        Title="Producten" Height="300" Width="500"
+        DataContext="{Binding Source={StaticResource Locator}, Path=Appie}">
     <DockPanel>
         <StackPanel DockPanel.Dock="Top" Orientation="Horizontal">
             <Label>Filter op Merk</Label>
@@ -15,20 +16,20 @@
             </ComboBox>
         </StackPanel>
         <TextBlock DockPanel.Dock="Top" Text="Appie Producten" FontSize="28" TextAlignment="Center"/>
-        <DataGrid DockPanel.Dock="Top" AutoGenerateColumns="False" IsReadOnly="True" Margin="5">
+        <DataGrid DockPanel.Dock="Top" AutoGenerateColumns="False" IsReadOnly="True" Margin="5" ItemsSource="{Binding ProductVMList}" SelectedItem="{Binding CurrentListProduct}">
             
             <DataGrid.Columns>
-                <DataGridTextColumn Header="Merk" Width="300" />
+                <DataGridTextColumn Header="Product" Width="200" Binding="{Binding ProductName}" />
+                <DataGridTextColumn Header="Merk" Width="100" Binding="{Binding Brand.Name}" />
                 <DataGridTextColumn Header="Aantal" Width="50" />
-                <DataGridTextColumn Header="Prijs" Width="*" />
-                <DataGridTextColumn Header="Korting" Width="*" />
+                <DataGridTextColumn Header="Prijs" Width="*" Binding="{Binding Price}" />
+                <DataGridTextColumn Header="Korting" Width="*" Binding="{Binding CurrentDiscount}"/>
             </DataGrid.Columns>
         </DataGrid>
         <StackPanel DockPanel.Dock="Bottom">
-            <Button>Toevoegen aan Winkelmantje</Button>
+            <Button Command="{Binding AddToShoppingListCommand}">Toevoegen aan Winkelmandje</Button>
             <Button>Product Bewerken</Button>
             <Button>Product Toevoegen</Button>
         </StackPanel>
-        <TextBlock DockPanel.Dock="Bottom" Text="Totaalprijs: " FontSize="14" Padding="5,0,0,0"/>
     </DockPanel>
 </Window>
