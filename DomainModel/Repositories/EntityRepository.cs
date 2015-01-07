@@ -41,6 +41,11 @@ namespace DomainModel.Repositories
             return t;
         }
 
+        public void Update()
+        {
+            database.SaveChanges();
+        }
+
         public void UpdateDatabase()
         {
             database.SaveChanges();

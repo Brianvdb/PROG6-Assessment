@@ -13,5 +13,7 @@ namespace DomainModel.Interfaces
         T Add(T t);
 
         T Delete(T t);
+
+        void Update();
     }
 }

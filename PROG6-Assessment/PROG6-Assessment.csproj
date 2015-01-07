@@ -99,6 +99,9 @@
     <Compile Include="ProductList.xaml.cs">
       <DependentUpon>ProductList.xaml</DependentUpon>
     </Compile>
+    <Compile Include="ProductTypeEdit.xaml.cs">
+      <DependentUpon>ProductTypeEdit.xaml</DependentUpon>
+    </Compile>
     <Compile Include="ProductTypeList.xaml.cs">
       <DependentUpon>ProductTypeList.xaml</DependentUpon>
     </Compile>
@@ -110,6 +113,8 @@
       <DependentUpon>ShoppingList.xaml</DependentUpon>
     </Compile>
     <Compile Include="ViewModel\AppieViewModel.cs" />
+    <Compile Include="ViewModel\ProductTypeVM.cs" />
+    <Compile Include="ViewModel\ProductVM.cs" />
     <Compile Include="ViewModel\ViewModelLocator.cs" />
     <Page Include="BasicEdit.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -148,6 +153,10 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="ProductList.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="ProductTypeEdit.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

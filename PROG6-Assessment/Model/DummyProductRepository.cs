@@ -37,5 +37,10 @@ namespace PROG6_Assessment.Model
         {
             return t;
         }
+
+        public void Update()
+        {
+
+        }
     }
 }
