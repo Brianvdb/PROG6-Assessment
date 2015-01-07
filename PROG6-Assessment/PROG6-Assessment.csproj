@@ -78,6 +78,9 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="BasicEdit.xaml.cs">
+      <DependentUpon>BasicEdit.xaml</DependentUpon>
+    </Compile>
     <Compile Include="BrandList.xaml.cs">
       <DependentUpon>BrandList.xaml</DependentUpon>
     </Compile>
@@ -108,6 +111,10 @@
     </Compile>
     <Compile Include="ViewModel\AppieViewModel.cs" />
     <Compile Include="ViewModel\ViewModelLocator.cs" />
+    <Page Include="BasicEdit.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="BrandList.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
