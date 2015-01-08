@@ -249,7 +249,7 @@ namespace PROG6_Assessment.ViewModel
             Recipe recipe = new Recipe()
             {
                 Name = "KAAS1",
-                Products = new List<Product>() {
+                Products = new Collection<Product>() {
                     productRepo.Get(1)
                  },
 
@@ -262,7 +262,7 @@ namespace PROG6_Assessment.ViewModel
             Recipe recipe1 = new Recipe()
             {
                 Name = "KAAS2",
-                Products = new List<Product>() {
+                Products = new Collection<Product>() {
                     productRepo.Get(1)
                  },
 

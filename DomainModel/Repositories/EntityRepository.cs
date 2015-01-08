@@ -30,8 +30,7 @@ namespace DomainModel.Repositories
 
         public T Add(T t)
         {
-            //database.Set<T>().Add(t);
-            database.Entry(t).State = EntityState.Added; 
+            database.Set<T>().Add(t); 
             database.SaveChanges();
             return t;
         }
