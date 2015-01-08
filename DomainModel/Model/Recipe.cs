@@ -14,6 +14,7 @@ namespace DomainModel.Model
 
         public string Name { get; set; }
 
-        public virtual List<Product> Products { get; set; }
+        [Required]
+        public virtual ICollection<Product> Products { get; set; }
     }
 }

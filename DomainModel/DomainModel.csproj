@@ -48,6 +48,23 @@
   <ItemGroup>
     <Compile Include="Database\DatabaseContext.cs" />
     <Compile Include="Interfaces\IRepository.cs" />
+    <Compile Include="Migrations\201501071602198_InitialCreate.cs" />
+    <Compile Include="Migrations\201501071602198_InitialCreate.Designer.cs">
+      <DependentUpon>201501071602198_InitialCreate.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201501082101190_RecipeModel.cs" />
+    <Compile Include="Migrations\201501082101190_RecipeModel.Designer.cs">
+      <DependentUpon>201501082101190_RecipeModel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201501082228089_TryFix.cs" />
+    <Compile Include="Migrations\201501082228089_TryFix.Designer.cs">
+      <DependentUpon>201501082228089_TryFix.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201501082231246_TryFix1.cs" />
+    <Compile Include="Migrations\201501082231246_TryFix1.Designer.cs">
+      <DependentUpon>201501082231246_TryFix1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Model\Brand.cs" />
     <Compile Include="Model\Department.cs" />
     <Compile Include="Model\Discount.cs" />
@@ -66,6 +83,20 @@
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201501071602198_InitialCreate.resx">
+      <DependentUpon>201501071602198_InitialCreate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201501082101190_RecipeModel.resx">
+      <DependentUpon>201501082101190_RecipeModel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201501082228089_TryFix.resx">
+      <DependentUpon>201501082228089_TryFix.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201501082231246_TryFix1.resx">
+      <DependentUpon>201501082231246_TryFix1.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

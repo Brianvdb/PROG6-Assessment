@@ -42,5 +42,10 @@ namespace PROG6_Assessment.Model
         {
 
         }
+
+        public Product Get(int id)
+        {
+            return null;
+        }
     }
 }

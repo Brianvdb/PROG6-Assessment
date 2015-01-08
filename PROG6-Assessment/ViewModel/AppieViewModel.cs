@@ -3,6 +3,7 @@ using DomainModel.Model;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.CommandWpf;
 using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.Windows.Input;
@@ -51,6 +52,10 @@ namespace PROG6_Assessment.ViewModel
         public ICommand OpenBrandEdit { get; set; }
         public ICommand OpenBrandEditAdd { get; set; }
         public ICommand DeleteBrandCommand { get; set; }
+        public ICommand SaveRecipeCommand { get; set; }
+        public ICommand OpenRecipeAddCommand { get; set; }
+        public ICommand AddRecipeToShoppingListCommand { get; set; }
+        public ICommand RemoveRecipeCommand { get; set; }
 
         // view models
         private ProductTypeVM _productType;
@@ -109,6 +114,34 @@ namespace PROG6_Assessment.ViewModel
             }
         }
 
+        private RecipeVM _newRecipe;
+        public RecipeVM NewRecipe
+        {
+            get
+            {
+                return _newRecipe;
+            }
+            set
+            {
+                _newRecipe = value;
+                RaisePropertyChanged();
+            }
+        }
+
+        private RecipeVM _currentRecipe;
+        public RecipeVM CurrentRecipe
+        {
+            get
+            {
+                return _currentRecipe;
+            }
+            set
+            {
+                _currentRecipe = value;
+                RaisePropertyChanged();
+            }
+        }
+
         public double ShoppingListPrice
         {
             get
@@ -126,6 +159,7 @@ namespace PROG6_Assessment.ViewModel
         public ObservableCollection<ProductVM> ProductVMList { get; set; }
         public ObservableCollection<ProductVM> ProductShoppingVMList { get; set; }
         public ObservableCollection<BrandVM> BrandVMList { get; set; }
+        public ObservableCollection<RecipeVM> RecipeVMList { get; set; }
 
         public AppieViewModel(IRepository<Brand> brandRepo, IRepository<Department> departmentRepo, IRepository<Discount> discountRepo, IRepository<Product> productRepo, IRepository<ProductType> productTypeRepo, IRepository<Recipe> recipeRepo)
         {
@@ -157,6 +191,10 @@ namespace PROG6_Assessment.ViewModel
             this.OpenBrandEdit = new RelayCommand(OpenBrandEditWindow);
             this.OpenBrandEditAdd = new RelayCommand(OpenBrandAddWindow);
             this.DeleteBrandCommand = new RelayCommand(DeleteBrand);
+            this.SaveRecipeCommand = new RelayCommand<string>(name => SaveRecipe(name));
+            this.OpenRecipeAddCommand = new RelayCommand(OpenRecipeAddWindow);
+            this.AddRecipeToShoppingListCommand = new RelayCommand(AddRecipeToShoppingList);
+            this.RemoveRecipeCommand = new RelayCommand(RemoveRecipe);
 
 
             // observable collections
@@ -164,27 +202,29 @@ namespace PROG6_Assessment.ViewModel
             this.ProductVMList = new ObservableCollection<ProductVM>();
             this.ProductShoppingVMList = new ObservableCollection<ProductVM>();
             this.BrandVMList = new ObservableCollection<BrandVM>();
+            this.RecipeVMList = new ObservableCollection<RecipeVM>();
 
             this.productTypeRepository.GetAll().ForEach(p => ProductTypeVMList.Add(new ProductTypeVM(p)));
             this.productRepository.GetAll().ForEach(p => ProductVMList.Add(new ProductVM(p)));
             this.brandRepository.GetAll().ForEach(b => BrandVMList.Add(new BrandVM(b)));
+            this.recipeRepository.GetAll().ForEach(r => RecipeVMList.Add(new RecipeVM(r)));
 
             //Trace.WriteLine("PRODUCT TYPES: " + ProductTypeVMList.Count);
 
             /*
              * DUMMY DATA PRODUCT (ja was te lui voor dummy repository)
-             * 
+             *
             Brand brand = new Brand()
             {
-                Name = "Unilever"
+                Name = "BlueBand"
             };
 
             Department dep = new Department() {
-                Name = "Kaas Afdeling"
+                Name = "Brood Afdeling"
             };
 
             ProductType type = new ProductType() {
-                Name = "Kaas"
+                Name = "Brood"
             };
 
             this.brandRepository.Add(brand);
@@ -193,16 +233,122 @@ namespace PROG6_Assessment.ViewModel
             
             Product product = new Product()
             {
-                ProductName = "Lekkere kaas",
+                ProductName = "Casino Brood",
                 Brand = brand,
                 Department = dep,
-                Price = 80,
+                Price = 2.99,
                 ProductType = type
                   
                   
             };
 
             this.productRepository.Add(product);*/
+
+
+
+            Recipe recipe = new Recipe()
+            {
+                Name = "KAAS1",
+                Products = new List<Product>() {
+                    productRepo.Get(1)
+                 },
+
+            };
+
+            this.recipeRepository.Add(recipe);
+
+            Trace.WriteLine(recipe.Products.Count);
+
+            Recipe recipe1 = new Recipe()
+            {
+                Name = "KAAS2",
+                Products = new List<Product>() {
+                    productRepo.Get(1)
+                 },
+
+            };
+            
+            this.recipeRepository.Add(recipe1);
+
+            Trace.WriteLine(recipe.Products.Count);
+            Trace.WriteLine(recipe1.Products.Count);
+
+        }
+
+        private void RemoveRecipe()
+        {
+            if (CurrentRecipe != null)
+            {
+                this.recipeRepository.Delete(CurrentRecipe.Recipe);
+                RecipeVMList.Remove(CurrentRecipe);
+                CurrentRecipe = null;
+            }
+        }
+
+        private void AddRecipeToShoppingList()
+        {
+
+            Trace.WriteLine(CurrentRecipe.Id + " : " + CurrentRecipe.Recipe.Products.Count);
+            foreach(ProductVM productVM in CurrentRecipe.ProductVMList) {
+                if (!contains(productVM.Product, ProductShoppingVMList))
+                {
+                    ProductShoppingVMList.Add(new ProductVM(productVM.Product));
+                    RaisePropertyChanged("ShoppingListPrice");
+                }
+            }
+        }
+
+        private bool contains(Product target, ObservableCollection<ProductVM> products)
+        {
+            foreach(ProductVM p in products) {
+                if (p.Id == target.Id)
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
+
+        private void OpenRecipeAddWindow()
+        {
+            NewRecipe = new RecipeVM(ProductShoppingVMList);
+            if (!RecipeAdd.Instance.IsVisible)
+            {
+                RecipeAdd.Instance.Show();
+            }
+        }
+
+        private void SaveRecipe(string name)
+        {
+            if (NewRecipe == null)
+            {
+                return;
+            }
+
+            NewRecipe.Name = name;
+            RecipeAdd.Instance.Close();
+
+
+            foreach (RecipeVM r in RecipeVMList)
+            {
+                Trace.WriteLine(r.Id + ": " + r.Recipe.Products.Count);
+            }
+
+            Trace.WriteLine("add");
+
+            this.recipeRepository.Add(NewRecipe.Recipe);
+
+            this.RecipeVMList.Add(NewRecipe);
+
+            foreach (RecipeVM r in RecipeVMList)
+            {
+                Trace.WriteLine(r.Id + ": " + r.Recipe.Products.Count);
+            }
+
+            if (!RecipeList.Instance.IsVisible)
+            {
+                RecipeList.Instance.Show();
+            }
         }
 
         private void DeleteBrand()
@@ -264,7 +410,7 @@ namespace PROG6_Assessment.ViewModel
 
         private void AddProductToShoppingList()
         {
-            if (CurrentListProduct != null && !ProductShoppingVMList.Contains(CurrentListProduct))
+            if (CurrentListProduct != null && !contains(CurrentListProduct.Product, ProductShoppingVMList))
             {
                 ProductShoppingVMList.Add(CurrentListProduct);
                 RaisePropertyChanged("ShoppingListPrice");
@@ -351,14 +497,12 @@ namespace PROG6_Assessment.ViewModel
 
         private void OpenBrandAddWindow()
         {
-            Trace.WriteLine("ADD");
             CurrentBrand = new BrandVM();
             OpenBrandEditWindow();
         }
 
         private void OpenBrandEditWindow()
         {
-            Trace.WriteLine("EDIT");
             if (CurrentBrand == null)
             {
                 return;

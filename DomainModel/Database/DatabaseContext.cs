@@ -17,5 +17,7 @@ namespace DomainModel.Database
         public DbSet<Discount> Discounts { get; set; }
 
         public DbSet<Product> Products { get; set; }
+
+        public DbSet<Recipe> Recipes { get; set; }
     }
 }

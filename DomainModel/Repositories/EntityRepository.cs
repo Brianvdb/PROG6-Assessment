@@ -2,6 +2,7 @@
 using DomainModel.Interfaces;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -29,7 +30,8 @@ namespace DomainModel.Repositories
 
         public T Add(T t)
         {
-            database.Set<T>().Add(t);
+            //database.Set<T>().Add(t);
+            database.Entry(t).State = EntityState.Added; 
             database.SaveChanges();
             return t;
         }

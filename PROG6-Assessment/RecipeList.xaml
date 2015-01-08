@@ -1,17 +1,18 @@
 ﻿<Window x:Class="PROG6_Assessment.RecipeList"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="Receptenlijst" Height="300" Width="300">
+        Title="Receptenlijst" Height="300" Width="300"
+        DataContext="{Binding Source={StaticResource Locator}, Path=Appie}">
     <DockPanel>
         <TextBlock DockPanel.Dock="Top" Text="Appie Receptenlijst" FontSize="28" TextAlignment="Center"/>
-        <DataGrid DockPanel.Dock="Top" AutoGenerateColumns="False" IsReadOnly="True" Margin="5">
+        <DataGrid DockPanel.Dock="Top" AutoGenerateColumns="False" IsReadOnly="True" Margin="5" ItemsSource="{Binding RecipeVMList}" SelectedItem="{Binding CurrentRecipe}">
             <DataGrid.Columns>
-                <DataGridTextColumn Header="Recept" Width="300" />
+                <DataGridTextColumn Header="Recept" Width="*" Binding="{Binding Name}" />
             </DataGrid.Columns>
         </DataGrid>
         <StackPanel DockPanel.Dock="Bottom">
-            <Button>Toevoegen aan Winkelwagen</Button>
-            <Button>Recept Verwijderen</Button>
+            <Button Command="{Binding AddRecipeToShoppingListCommand}">Toevoegen aan Winkelwagen</Button>
+            <Button Command="{Binding RemoveRecipeCommand}">Recept Verwijderen</Button>
         </StackPanel>
     </DockPanel>
 </Window>

@@ -14,6 +14,8 @@ namespace DomainModel.Interfaces
 
         T Delete(T t);
 
+        T Get(int id);
+
         void Update();
     }
 }

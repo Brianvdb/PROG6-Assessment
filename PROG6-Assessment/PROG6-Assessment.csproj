@@ -108,6 +108,9 @@
     <Compile Include="ProductTypeList.xaml.cs">
       <DependentUpon>ProductTypeList.xaml</DependentUpon>
     </Compile>
+    <Compile Include="RecipeAdd.xaml.cs">
+      <DependentUpon>RecipeAdd.xaml</DependentUpon>
+    </Compile>
     <Compile Include="RecipeList.xaml.cs">
       <DependentUpon>RecipeList.xaml</DependentUpon>
     </Compile>
@@ -119,6 +122,7 @@
     <Compile Include="ViewModel\BrandVM.cs" />
     <Compile Include="ViewModel\ProductTypeVM.cs" />
     <Compile Include="ViewModel\ProductVM.cs" />
+    <Compile Include="ViewModel\RecipeVM.cs" />
     <Compile Include="ViewModel\ViewModelLocator.cs" />
     <Page Include="BasicEdit.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -171,6 +175,10 @@
     <Page Include="ProductTypeList.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="RecipeAdd.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="RecipeList.xaml">
       <SubType>Designer</SubType>

@@ -163,14 +163,14 @@ namespace PROG6_Assessment.ViewModel
         public ProductVM()
         {
             _product = new Product();
-            _amount = 1;
+            Amount = 1;
             IsNew = true;
         }
 
         public ProductVM(Product product)
         {
             _product = product;
-            _amount = 1;
+            Amount = 1;
             IsNew = false;
         }
 
