@@ -52,7 +52,6 @@ namespace PROG6_Assessment.ViewModel
             foreach(Product p in recipe.Products) {
                 ProductVMList.Add(new ProductVM(p));
             }
-           
         }
 
         public RecipeVM(ObservableCollection<ProductVM> productList)

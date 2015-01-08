@@ -64,6 +64,10 @@
     <Compile Include="Migrations\201501082231246_TryFix1.Designer.cs">
       <DependentUpon>201501082231246_TryFix1.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201501082322549_HopelijkDeFix.cs" />
+    <Compile Include="Migrations\201501082322549_HopelijkDeFix.Designer.cs">
+      <DependentUpon>201501082322549_HopelijkDeFix.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Model\Brand.cs" />
     <Compile Include="Model\Department.cs" />
@@ -96,6 +100,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201501082231246_TryFix1.resx">
       <DependentUpon>201501082231246_TryFix1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201501082322549_HopelijkDeFix.resx">
+      <DependentUpon>201501082322549_HopelijkDeFix.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

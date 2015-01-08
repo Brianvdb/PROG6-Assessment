@@ -33,5 +33,7 @@ namespace DomainModel.Model
         public virtual Brand Brand { get; set; }
 
         public virtual List<Discount> Discounts { get; set; }
+
+        public virtual ICollection<Recipe> Recipes { get; set; }
     }
 }

@@ -243,36 +243,6 @@ namespace PROG6_Assessment.ViewModel
             };
 
             this.productRepository.Add(product);*/
-
-
-
-            Recipe recipe = new Recipe()
-            {
-                Name = "KAAS1",
-                Products = new Collection<Product>() {
-                    productRepo.Get(1)
-                 },
-
-            };
-
-            this.recipeRepository.Add(recipe);
-
-            Trace.WriteLine(recipe.Products.Count);
-
-            Recipe recipe1 = new Recipe()
-            {
-                Name = "KAAS2",
-                Products = new Collection<Product>() {
-                    productRepo.Get(1)
-                 },
-
-            };
-            
-            this.recipeRepository.Add(recipe1);
-
-            Trace.WriteLine(recipe.Products.Count);
-            Trace.WriteLine(recipe1.Products.Count);
-
         }
 
         private void RemoveRecipe()
@@ -288,11 +258,11 @@ namespace PROG6_Assessment.ViewModel
         private void AddRecipeToShoppingList()
         {
 
-            Trace.WriteLine(CurrentRecipe.Id + " : " + CurrentRecipe.Recipe.Products.Count);
             foreach(ProductVM productVM in CurrentRecipe.ProductVMList) {
                 if (!contains(productVM.Product, ProductShoppingVMList))
                 {
-                    ProductShoppingVMList.Add(new ProductVM(productVM.Product));
+                    productVM.Amount = 1;
+                    ProductShoppingVMList.Add(productVM);
                     RaisePropertyChanged("ShoppingListPrice");
                 }
             }
@@ -328,22 +298,9 @@ namespace PROG6_Assessment.ViewModel
             NewRecipe.Name = name;
             RecipeAdd.Instance.Close();
 
-
-            foreach (RecipeVM r in RecipeVMList)
-            {
-                Trace.WriteLine(r.Id + ": " + r.Recipe.Products.Count);
-            }
-
-            Trace.WriteLine("add");
-
             this.recipeRepository.Add(NewRecipe.Recipe);
 
             this.RecipeVMList.Add(NewRecipe);
-
-            foreach (RecipeVM r in RecipeVMList)
-            {
-                Trace.WriteLine(r.Id + ": " + r.Recipe.Products.Count);
-            }
 
             if (!RecipeList.Instance.IsVisible)
             {
