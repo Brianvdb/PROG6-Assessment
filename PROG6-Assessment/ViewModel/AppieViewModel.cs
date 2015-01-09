@@ -449,6 +449,18 @@ namespace PROG6_Assessment.ViewModel
         {
             if (CurrentProductType != null && !CurrentProductType.IsNew)
             {
+                foreach (Product p in this.productRepository.GetAll())
+                {
+                    if (p.ProductTypeId == CurrentProductType.Id)
+                    {
+                        string message = "Je kan dit product type niet verwijderen omdat het gekoppeld is aan één of meerdere producten.";
+                        string caption = "Fout";
+                        MessageBoxButton buttons = MessageBoxButton.OK;
+                        MessageBoxImage icon = MessageBoxImage.Error;
+                        MessageBox.Show(message, caption, buttons, icon);
+                        return;
+                    }
+                }
                 this.productTypeRepository.Delete(CurrentProductType.ProductType);
                 ProductTypeVMList.Remove(CurrentProductType);
                 CurrentProductType = null;
