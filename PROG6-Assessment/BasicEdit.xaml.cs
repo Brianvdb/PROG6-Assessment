@@ -21,6 +21,7 @@ namespace PROG6_Assessment
     {
         public BasicEdit()
         {
+            WindowStartupLocation = System.Windows.WindowStartupLocation.CenterScreen;
             InitializeComponent();
         }
     }

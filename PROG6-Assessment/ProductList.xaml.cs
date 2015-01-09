@@ -19,10 +19,11 @@ namespace PROG6_Assessment
     /// </summary>
     public partial class Products : Window
     {
-        private static Window instance;
+        private static Window _instance;
 
         public Products()
         {
+            WindowStartupLocation = System.Windows.WindowStartupLocation.CenterScreen;
             InitializeComponent();
         }
 
@@ -30,11 +31,11 @@ namespace PROG6_Assessment
         {
             get
             {
-                if (instance == null || !instance.IsVisible)
+                if (_instance == null || !_instance.IsVisible)
                 {
-                    instance = new Products();
+                    _instance = new Products();
                 }
-                return instance;
+                return _instance;
             }
         }
     }

@@ -19,9 +19,10 @@ namespace PROG6_Assessment
     /// </summary>
     public partial class BrandEdit : Window
     {
-        public static Window instance { get; set; }
+        private static Window _instance;
         public BrandEdit()
         {
+            WindowStartupLocation = System.Windows.WindowStartupLocation.CenterScreen;
             InitializeComponent();
         }
 
@@ -29,11 +30,11 @@ namespace PROG6_Assessment
         {
             get
             {
-                if (instance == null || !instance.IsVisible)
+                if (_instance == null || !_instance.IsVisible)
                 {
-                    instance = new BrandEdit();
+                    _instance = new BrandEdit();
                 }
-                return instance;
+                return _instance;
             }
         }
     }

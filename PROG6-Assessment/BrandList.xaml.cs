@@ -19,10 +19,11 @@ namespace PROG6_Assessment
     /// </summary>
     public partial class BrandList : Window
     {
-        private static Window instance;
+        private static Window _instance;
 
         public BrandList()
         {
+            WindowStartupLocation = System.Windows.WindowStartupLocation.CenterScreen;
             InitializeComponent();
         }
 
@@ -30,11 +31,11 @@ namespace PROG6_Assessment
         {
             get
             {
-                if (instance == null || !instance.IsVisible)
+                if (_instance == null || !_instance.IsVisible)
                 {
-                    instance = new BrandList();
+                    _instance = new BrandList();
                 }
-                return instance;
+                return _instance;
             }
         }
     }

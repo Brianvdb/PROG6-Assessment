@@ -19,10 +19,11 @@ namespace PROG6_Assessment
     /// </summary>
     public partial class DepartmentList : Window
     {
-        private static Window instance;
+        private static Window _instance;
 
         public DepartmentList()
         {
+            WindowStartupLocation = System.Windows.WindowStartupLocation.CenterScreen;
             InitializeComponent();
         }
 
@@ -30,11 +31,11 @@ namespace PROG6_Assessment
         {
             get
             {
-                if (instance == null || !instance.IsVisible)
+                if (_instance == null || !_instance.IsVisible)
                 {
-                    instance = new DepartmentList();
+                    _instance = new DepartmentList();
                 }
-                return instance;
+                return _instance;
             }
         }
     }

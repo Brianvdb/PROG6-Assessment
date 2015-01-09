@@ -21,6 +21,7 @@ namespace PROG6_Assessment
     {
         public DiscountEdit()
         {
+            WindowStartupLocation = System.Windows.WindowStartupLocation.CenterScreen;
             InitializeComponent();
         }
     }

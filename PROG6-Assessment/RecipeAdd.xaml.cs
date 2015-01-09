@@ -19,9 +19,10 @@ namespace PROG6_Assessment
     /// </summary>
     public partial class RecipeAdd : Window
     {
-        public static Window instance;
+        private static Window _instance;
         public RecipeAdd()
         {
+            WindowStartupLocation = System.Windows.WindowStartupLocation.CenterScreen;
             InitializeComponent();
         }
 
@@ -29,11 +30,11 @@ namespace PROG6_Assessment
         {
             get
             {
-                if (instance == null || !instance.IsVisible)
+                if (_instance == null || !_instance.IsVisible)
                 {
-                    instance = new RecipeAdd();
+                    _instance = new RecipeAdd();
                 }
-                return instance;
+                return _instance;
             }
         }
     }
