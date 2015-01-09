@@ -6,6 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
+using System.Windows;
 using System.Windows.Input;
 
 namespace PROG6_Assessment.ViewModel
@@ -312,6 +313,18 @@ namespace PROG6_Assessment.ViewModel
         {
             if (CurrentBrand != null && !CurrentBrand.IsNew)
             {
+                foreach (Product p in this.productRepository.GetAll())
+                {
+                    if (p.BrandId == CurrentBrand.Id)
+                    {
+                        string message = "Je kan dit merk niet verwijderen omdat het gekoppeld is aan één of meerdere producten.";
+                        string caption = "Fout";
+                        MessageBoxButton buttons = MessageBoxButton.OK;
+                        MessageBoxImage icon = MessageBoxImage.Error;
+                        MessageBox.Show(message, caption, buttons, icon);
+                        return;
+                    }
+                }
                 this.brandRepository.Delete(CurrentBrand.Brand);
                 BrandVMList.Remove(CurrentBrand);
                 CurrentBrand = null;
