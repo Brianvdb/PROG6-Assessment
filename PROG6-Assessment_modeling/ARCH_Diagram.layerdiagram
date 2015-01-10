@@ -1,0 +1,104 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<layerModel xmlns:dm0="http://schemas.microsoft.com/VisualStudio/2008/DslTools/Core" xmlns:dm1="http://schemas.microsoft.com/dsltools/SimpleShapesModel" dslVersion="1.0.0.0" Id="c71878e3-72f1-401b-a88a-b1ab779dc1e7" xmlns="http://schemas.microsoft.com/VisualStudio/TeamArchitect/LayerDesigner">
+  <layers>
+    <layer Id="a17ab348-cb4b-4431-b07c-4945cc8f4f68" name="UI Layer - Views">
+      <dependencyToLayers>
+        <dependencyFromLayerToLayer Id="5aa261f3-955a-4583-b32f-9e9f8a660890" direction="Bidirectional">
+          <layerMoniker Id="72ffc7fd-f2e4-4c7f-b12e-7635bd19583e" />
+        </dependencyFromLayerToLayer>
+      </dependencyToLayers>
+      <childLayers>
+        <layer Id="0d5e4836-56e5-48c5-b7c1-45e18edbe3d6" name="WPF Window" />
+        <layer Id="e68e6240-7714-4d54-8b0f-d8406648c282" name="ShoppingList">
+          <dependencyToLayers>
+            <dependencyFromLayerToLayer Id="2cf12930-598d-4adb-8cd7-10152d18f14e" direction="Forward">
+              <layerMoniker Id="0d5e4836-56e5-48c5-b7c1-45e18edbe3d6" />
+            </dependencyFromLayerToLayer>
+          </dependencyToLayers>
+        </layer>
+        <layer Id="95594235-f249-43b5-88ca-6d222b6edd18" name="ProductList">
+          <dependencyToLayers>
+            <dependencyFromLayerToLayer Id="c8537fd5-f93b-4a30-a12d-3dabf199e785" direction="Forward">
+              <layerMoniker Id="0d5e4836-56e5-48c5-b7c1-45e18edbe3d6" />
+            </dependencyFromLayerToLayer>
+          </dependencyToLayers>
+        </layer>
+        <layer Id="4cd24921-0128-48ff-9e29-11cbf51108f4" name="etc...">
+          <dependencyToLayers>
+            <dependencyFromLayerToLayer Id="8ba7d77e-483a-43eb-9daa-e0a955d5f3c1" direction="Forward">
+              <layerMoniker Id="0d5e4836-56e5-48c5-b7c1-45e18edbe3d6" />
+            </dependencyFromLayerToLayer>
+          </dependencyToLayers>
+        </layer>
+      </childLayers>
+    </layer>
+    <layer Id="72ffc7fd-f2e4-4c7f-b12e-7635bd19583e" name="Business Logic - ViewModels">
+      <dependencyToLayers>
+        <dependencyFromLayerToLayer Id="1e93b4a6-c51e-450f-812c-36d5b75762e6" direction="Forward">
+          <layerMoniker Id="113fa0ea-2717-4936-b81c-877a150dfd37" />
+        </dependencyFromLayerToLayer>
+      </dependencyToLayers>
+      <childLayers>
+        <layer Id="99bf1662-53f4-47ce-9485-003325faf7a5" name="AppieViewModel">
+          <dependencyToLayers>
+            <dependencyFromLayerToLayer Id="0616bcc2-73b5-47f3-99e7-83ce543d9474" direction="Forward">
+              <layerMoniker Id="130e308a-dd6d-4e36-be04-55191fd0f50f" />
+            </dependencyFromLayerToLayer>
+          </dependencyToLayers>
+        </layer>
+        <layer Id="2e9f1d8b-7b5f-40b6-a7af-72a9e1ba40de" name="etc..">
+          <dependencyToLayers>
+            <dependencyFromLayerToLayer Id="187a56bb-28e1-4ece-8a40-539d3e7db15a" direction="Forward">
+              <layerMoniker Id="99bf1662-53f4-47ce-9485-003325faf7a5" />
+            </dependencyFromLayerToLayer>
+          </dependencyToLayers>
+        </layer>
+        <layer Id="93e75311-79dd-4547-aa00-f729543d62a8" name="RecipeVM">
+          <dependencyToLayers>
+            <dependencyFromLayerToLayer Id="cb7ef9c4-64e6-46b3-8a66-bf42e1fec76a" direction="Forward">
+              <layerMoniker Id="99bf1662-53f4-47ce-9485-003325faf7a5" />
+            </dependencyFromLayerToLayer>
+          </dependencyToLayers>
+        </layer>
+        <layer Id="ddb84519-1770-46a6-9bba-7efd7fcff3d2" name="ProductVM">
+          <dependencyToLayers>
+            <dependencyFromLayerToLayer Id="468f8d70-2bdd-4649-8f19-adb9ca674c95" direction="Forward">
+              <layerMoniker Id="99bf1662-53f4-47ce-9485-003325faf7a5" />
+            </dependencyFromLayerToLayer>
+          </dependencyToLayers>
+        </layer>
+        <layer Id="130e308a-dd6d-4e36-be04-55191fd0f50f" name="ViewModelLocator" />
+      </childLayers>
+    </layer>
+    <layer Id="113fa0ea-2717-4936-b81c-877a150dfd37" name="Model Layer">
+      <dependencyToLayers>
+        <dependencyFromLayerToLayer Id="43addba6-f3dc-4d72-918a-05b24567a32f" direction="Bidirectional">
+          <layerMoniker Id="8d9b40b7-3bcd-45a9-b326-57e8d2fa67c1" />
+        </dependencyFromLayerToLayer>
+      </dependencyToLayers>
+      <childLayers>
+        <layer Id="b2068eb3-0d43-412d-8512-16843adcaca4" name="Product" />
+        <layer Id="54f2576d-8da8-4d65-8549-20947e456109" name="Recipe" />
+        <layer Id="00a9b487-1f66-41d1-873f-669d705063af" name="etc.." />
+      </childLayers>
+    </layer>
+    <layer Id="8d9b40b7-3bcd-45a9-b326-57e8d2fa67c1" name="Data Store Layer">
+      <childLayers>
+        <layer Id="c1be26f9-7d18-4724-ac92-d8f4abd6c170" name="EntityFramework" />
+        <layer Id="5f4b3737-2c37-454f-bc50-f0dc2a068974" name="MS SQL" />
+        <layer Id="8c5e477f-6efa-4ba2-9d95-451eb77f3d38" name="DatabaseContext" />
+      </childLayers>
+    </layer>
+    <layer Id="141659d9-b945-4218-b7f6-7dbeb78df957" name="UnitTests">
+      <dependencyToLayers>
+        <dependencyFromLayerToLayer Id="7071eec9-c2fa-4fad-82c0-c254e5cd8105" direction="Forward">
+          <layerMoniker Id="72ffc7fd-f2e4-4c7f-b12e-7635bd19583e" />
+        </dependencyFromLayerToLayer>
+      </dependencyToLayers>
+      <childLayers>
+        <layer Id="bea28f72-cef4-4973-9809-c35572577e12" name="Mocking Framework" />
+        <layer Id="f73e35f2-ecce-41d8-929f-882c45aff256" name="Moq" />
+      </childLayers>
+    </layer>
+  </layers>
+</layerModel>
