@@ -68,6 +68,7 @@
           </dependencyToLayers>
         </layer>
         <layer Id="130e308a-dd6d-4e36-be04-55191fd0f50f" name="ViewModelLocator" />
+        <layer Id="7a25921e-92fe-4a30-811e-e238fede6c0f" name="MVVMLight" />
       </childLayers>
     </layer>
     <layer Id="113fa0ea-2717-4936-b81c-877a150dfd37" name="Model Layer">
@@ -87,6 +88,7 @@
         <layer Id="c1be26f9-7d18-4724-ac92-d8f4abd6c170" name="EntityFramework" />
         <layer Id="5f4b3737-2c37-454f-bc50-f0dc2a068974" name="MS SQL" />
         <layer Id="8c5e477f-6efa-4ba2-9d95-451eb77f3d38" name="DatabaseContext" />
+        <layer Id="126cb897-6738-4a64-9e66-35eba764f8fa" name="Repositories" />
       </childLayers>
     </layer>
     <layer Id="141659d9-b945-4218-b7f6-7dbeb78df957" name="UnitTests">

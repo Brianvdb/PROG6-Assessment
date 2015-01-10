@@ -23,6 +23,9 @@
   <Import Project="$(VSToolsPath)\ArchitectureTools\Microsoft.VisualStudio.TeamArchitect.ModelingProject.targets" Condition="'$(VSToolsPath)' != ''" />
   <ItemGroup>
     <Folder Include="ModelDefinition\" />
+    <Content Include="arch_diagram.png">
+      <SubType>Content</SubType>
+    </Content>
     <Content Include="ModelDefinition\PROG6-Assessment_modeling.uml">
       <SubType>Content</SubType>
     </Content>
