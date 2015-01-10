@@ -217,9 +217,7 @@ namespace PROG6_Assessment.ViewModel
 
             //Trace.WriteLine("PRODUCT TYPES: " + ProductTypeVMList.Count);
 
-            /*
-             * DUMMY DATA PRODUCT (ja was te lui voor dummy repository)
-             *
+            /**DUMMY PRODUCT
             Brand brand = new Brand()
             {
                 Name = "BlueBand"
@@ -481,10 +479,15 @@ namespace PROG6_Assessment.ViewModel
             }
             else
             {
-                this.brandRepository.Update();
+               this.brandRepository.Update();
             }
-            BrandEdit.Instance.Close();
-            OpenBrandWindow();
+
+            try
+            {
+                OpenBrandWindow();
+                BrandEdit.Instance.Close();
+            }
+            catch { }
         }
 
         private void ClearShoppingList()

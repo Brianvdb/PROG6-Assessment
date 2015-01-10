@@ -11,8 +11,8 @@
             </DataGrid.Columns>
         </DataGrid>
         <StackPanel DockPanel.Dock="Bottom">
-            <Button>Merk Bewerken</Button>
-            <Button>Merk Toevoegen</Button>
+            <Button>Afdeling Bewerken</Button>
+            <Button>Afdeling Toevoegen</Button>
         </StackPanel>
     </DockPanel>
 </Window>

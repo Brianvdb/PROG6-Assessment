@@ -12,11 +12,15 @@
                 <DataGridTextColumn Header="Geldig van" Width="*" />
                 <DataGridTextColumn Header="Geldig tot" Width="*" />
                 <DataGridTextColumn Header="Nu" Width="30" />
+
             </DataGrid.Columns>
         </DataGrid>
         <StackPanel DockPanel.Dock="Bottom">
             <Button>Korting Bewerken</Button>
             <Button>Korting Toevoegen</Button>
+            
+            <Label Margin="0,20,0,0">Geselecteerd product - Moet worden gebind</Label>
+            <Button>Voeg geselecteerde korting toe aan dit product</Button>
         </StackPanel>
     </DockPanel>
 </Window>
