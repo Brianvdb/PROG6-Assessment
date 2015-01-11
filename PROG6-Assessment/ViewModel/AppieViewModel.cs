@@ -40,6 +40,10 @@ namespace PROG6_Assessment.ViewModel
         public ICommand OpenShoppingList { get; set; }
         public ICommand OpenBrandList { get; set; }
         public ICommand OpenProductList { get; set; }
+        public ICommand EditProductCommand { get; set; }
+        public ICommand AddProductCommand { get; set; }
+        public ICommand SaveProductCommand { get; set; }
+        public ICommand RemoveProductCommand { get; set; }
         public ICommand OpenDepartmentList { get; set; }
         public ICommand OpenRecipeList { get; set; }
         public ICommand OpenDiscountList { get; set; }
@@ -147,6 +151,20 @@ namespace PROG6_Assessment.ViewModel
             }
         }
 
+        private DepartmentVM _currentDepartment;
+        public DepartmentVM CurrentDepartment
+        {
+            get
+            {
+                return _currentDepartment;
+            }
+            set
+            {
+                _currentDepartment = value;
+                RaisePropertyChanged();
+            }
+        }
+
         public double ShoppingListPrice
         {
             get
@@ -165,6 +183,7 @@ namespace PROG6_Assessment.ViewModel
         public ObservableCollection<ProductVM> ProductShoppingVMList { get; set; }
         public ObservableCollection<BrandVM> BrandVMList { get; set; }
         public ObservableCollection<RecipeVM> RecipeVMList { get; set; }
+        public ObservableCollection<DepartmentVM> DepartmentVMList { get; set; }
 
         public AppieViewModel(IRepository<Brand> brandRepo, IRepository<Department> departmentRepo, IRepository<Discount> discountRepo, IRepository<Product> productRepo, IRepository<ProductType> productTypeRepo, IRepository<Recipe> recipeRepo)
         {
@@ -180,6 +199,10 @@ namespace PROG6_Assessment.ViewModel
             this.OpenShoppingList = new RelayCommand(OpenShoppingWindow);
             this.OpenBrandList = new RelayCommand(OpenBrandWindow);
             this.OpenProductList = new RelayCommand(OpenProductWindow);
+            this.EditProductCommand = new RelayCommand(OpenProductEditWindow);
+            this.AddProductCommand = new RelayCommand(OpenProductAddWindow);
+            this.SaveProductCommand = new RelayCommand(SaveProduct);
+            this.RemoveProductCommand = new RelayCommand(RemoveProduct);
             this.OpenRecipeList = new RelayCommand(OpenRecipeWindow);
             this.OpenDepartmentList = new RelayCommand(OpenDepartmentWindow);
             this.OpenDiscountList = new RelayCommand(OpenDiscountWindow);
@@ -205,18 +228,25 @@ namespace PROG6_Assessment.ViewModel
 
             // observable collections
             this.ProductTypeVMList = new ObservableCollection<ProductTypeVM>();
+            this.ProductTypeVMList.Add(new ProductTypeVM() { Name = "Geen" });
             this.ProductVMList = new ObservableCollection<ProductVM>();
             this.ProductShoppingVMList = new ObservableCollection<ProductVM>();
             this.BrandVMList = new ObservableCollection<BrandVM>();
+            this.BrandVMList.Add(new BrandVM() { Name = "Geen" });
             this.RecipeVMList = new ObservableCollection<RecipeVM>();
+            this.DepartmentVMList = new ObservableCollection<DepartmentVM>();
+            this.DepartmentVMList.Add(new DepartmentVM() { Name = "Geen" });
 
             this.productTypeRepository.GetAll().ForEach(p => ProductTypeVMList.Add(new ProductTypeVM(p)));
             this.productRepository.GetAll().ForEach(p => ProductVMList.Add(new ProductVM(p)));
             this.brandRepository.GetAll().ForEach(b => BrandVMList.Add(new BrandVM(b)));
             this.recipeRepository.GetAll().ForEach(r => RecipeVMList.Add(new RecipeVM(r)));
+            this.departmentRepository.GetAll().ForEach(d => DepartmentVMList.Add(new DepartmentVM(d)));
 
             //Trace.WriteLine("PRODUCT TYPES: " + ProductTypeVMList.Count);
 
+            
+            
             /**DUMMY PRODUCT
             Brand brand = new Brand()
             {
@@ -633,6 +663,60 @@ namespace PROG6_Assessment.ViewModel
             }
             BrandList.Instance.Close();
             BrandEdit.Instance.Show();
+        }
+
+        private void OpenProductAddWindow()
+        {
+            CurrentListProduct = new ProductVM();
+            OpenProductEditWindow();
+        }
+
+        private void OpenProductEditWindow()
+        {
+            if (CurrentListProduct == null)
+            {
+                return;
+            }
+            Products.Instance.Close();
+            ProductEdit.Instance.Show();
+        }
+
+        private void SaveProduct()
+        {
+            if (CurrentListProduct.IsNew)
+            {
+                this.productRepository.Add(CurrentListProduct.Product);
+                CurrentListProduct.IsNew = false;
+                ProductVMList.Add(CurrentListProduct);
+            }
+            else
+            {
+                this.productRepository.Update();
+            }
+
+            try
+            {
+                OpenProductWindow();
+                ProductEdit.Instance.Close();
+            }
+            catch { }
+        }
+
+        private void RemoveProduct()
+        {
+            if (CurrentListProduct != null && !CurrentListProduct.IsNew)
+            {
+                this.productRepository.Delete(CurrentListProduct.Product);
+                ProductVMList.Remove(CurrentListProduct);
+                CurrentListProduct = null;
+            }
+
+            try
+            {
+                OpenProductWindow();
+                ProductEdit.Instance.Close();
+            }
+            catch { }
         }
     }
 }

@@ -1,7 +1,8 @@
 ﻿<Window x:Class="PROG6_Assessment.ProductEdit"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="ProductEdit" Height="300" Width="400">
+        Title="ProductEdit" Height="300" Width="400"
+        DataContext="{Binding Source={StaticResource Locator}, Path=Appie}">
     <StackPanel Margin="0,0,0.333,-19.333">
     <Grid>
         <Grid.RowDefinitions>
@@ -16,18 +17,33 @@
             <ColumnDefinition Width="200" />
         </Grid.ColumnDefinitions>
 
-        <Label Margin="0,0,20,0" Grid.Row="0" Grid.Column="0" >Product Type:</Label>
-        <ComboBox Grid.Row="0" Grid.Column="1" ></ComboBox>
+            <Label Margin="0,0,20,0" Grid.Row="0" Grid.Column="0">Product Type:</Label>
+            <ComboBox Grid.Row="0" Grid.Column="1" 
+                      ItemsSource="{Binding ProductTypeVMList}" 
+                      SelectedValue="{Binding CurrentListProduct.Product.ProductTypeId, Mode=TwoWay}" 
+                      SelectedValuePath="Id" 
+                      DisplayMemberPath="Name">
+            </ComboBox>
 
         <Label Margin="0,0,20,0" Grid.Row="1" Grid.Column="0" >Product Merk:</Label>
-        <ComboBox Grid.Row="1" Grid.Column="1" ></ComboBox>
+            <ComboBox Grid.Row="1" Grid.Column="1" 
+                      ItemsSource="{Binding BrandVMList}" 
+                      SelectedValue="{Binding CurrentListProduct.Product.BrandId, Mode=TwoWay}" 
+                      SelectedValuePath="Id" 
+                      DisplayMemberPath="Name"></ComboBox>
 
         <Label Margin="0,0,20,0" Grid.Row="2" Grid.Column="0" >Product Afdeling:</Label>
-        <ComboBox Grid.Row="2" Grid.Column="1" ></ComboBox>
+            <ComboBox Grid.Row="2" Grid.Column="1"  
+                      ItemsSource="{Binding DepartmentVMList}" 
+                      SelectedValue="{Binding CurrentListProduct.Product.DepartmentId, Mode=TwoWay}" 
+                      SelectedValuePath="Id" 
+                      DisplayMemberPath="Name"></ComboBox>
 
         <Label Margin="0,0,20,0" Grid.Row="3" Grid.Column="0" >Product Naam:</Label>
-        <TextBox Grid.Row="3" Grid.Column="1" ></TextBox>
-    </Grid>
+            <TextBox Grid.Row="3" Grid.Column="1" Text="{Binding CurrentListProduct.ProductName}"></TextBox>
+        <Label Margin="0,0,20,0" Grid.Row="4" Grid.Column="0" >Standaart prijs:</Label>
+            <TextBox Grid.Row="4" Grid.Column="1" Text="{Binding CurrentListProduct.Price}"></TextBox>
+        </Grid>
         
         <Label Margin="0,10,0,0">Kortingen van toepassing op dit product:</Label>
         <DataGrid AutoGenerateColumns="False" IsReadOnly="True" Margin="5">
@@ -44,8 +60,8 @@
         <Button>Verwijder geselecteerde korting van dit product</Button>
         <Button>Korting toevoegen</Button>
         
-        <Button Margin="0,20,0,0" Grid.Row="4" Grid.Column="0">Opslaan</Button>
-        <Button Grid.Row="4" Grid.Column="1" >Verwijderen</Button>
+        <Button Margin="0,20,0,0" Grid.Row="4" Grid.Column="0" Command="{Binding SaveProductCommand}">Opslaan</Button>
+        <Button Grid.Row="4" Grid.Column="1" Command="{Binding RemoveProductCommand}">Verwijderen</Button>
     </StackPanel>
 
 </Window>

@@ -19,10 +19,24 @@ namespace PROG6_Assessment
     /// </summary>
     public partial class ProductEdit : Window
     {
+        private static Window _instance;
+
         public ProductEdit()
         {
             WindowStartupLocation = System.Windows.WindowStartupLocation.CenterScreen;
             InitializeComponent();
+        }
+
+        public static Window Instance
+        {
+            get
+            {
+                if (_instance == null || !_instance.IsVisible)
+                {
+                    _instance = new ProductEdit();
+                }
+                return _instance;
+            }
         }
     }
 }

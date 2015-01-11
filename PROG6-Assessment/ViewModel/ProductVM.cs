@@ -163,6 +163,7 @@ namespace PROG6_Assessment.ViewModel
         public ProductVM()
         {
             _product = new Product();
+            _product.Discounts = new List<Discount>();
             Amount = 1;
             IsNew = true;
         }

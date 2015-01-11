@@ -1,19 +1,16 @@
 ﻿<Window x:Class="PROG6_Assessment.Products"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="Producten" Height="300" Width="500"
+        Title="Producten" Height="500" Width="500"
         DataContext="{Binding Source={StaticResource Locator}, Path=Appie}">
     <DockPanel>
         <StackPanel DockPanel.Dock="Top" Orientation="Horizontal">
             <Label>Filter op Merk</Label>
-            <ComboBox MinWidth="150">
-                <ComboBoxItem>Allen</ComboBoxItem>
-            </ComboBox>
+            <ComboBox MinWidth="150" SelectedIndex="0" ItemsSource="{Binding BrandVMList}" DisplayMemberPath="Name" SelectedValuePath="Id" />
 
             <Label>Filter op Afdeling</Label>
-            <ComboBox MinWidth="150">
-                <ComboBoxItem>Allen</ComboBoxItem>
-            </ComboBox>
+            <ComboBox MinWidth="150" SelectedIndex="0" ItemsSource="{Binding DepartmentVMList}" DisplayMemberPath="Name" SelectedValuePath="Id" />
+
         </StackPanel>
         <TextBlock DockPanel.Dock="Top" Text="Appie Producten" FontSize="28" TextAlignment="Center"/>
         <DataGrid DockPanel.Dock="Top" AutoGenerateColumns="False" IsReadOnly="True" Margin="5" ItemsSource="{Binding ProductVMList}" SelectedItem="{Binding CurrentListProduct}">
@@ -27,8 +24,8 @@
         </DataGrid>
         <StackPanel DockPanel.Dock="Bottom">
             <Button Command="{Binding AddToShoppingListCommand}">Toevoegen aan Winkelmandje</Button>
-            <Button>Product Bewerken</Button>
-            <Button>Product Toevoegen</Button>
+            <Button Command="{Binding EditProductCommand}">Product Bewerken</Button>
+            <Button Command="{Binding AddProductCommand}">Product Toevoegen</Button>
         </StackPanel>
     </DockPanel>
 </Window>
