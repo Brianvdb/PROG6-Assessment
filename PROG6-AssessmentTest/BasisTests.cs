@@ -61,6 +61,41 @@ namespace PROG6_AssessmentTest
             brandRepo.Verify(r => r.Add(It.IsAny<Brand>()), Times.Once());
         }
 
+        [TestMethod]
+        public void TestCalculateSalePricing()
+        {
+            //setup
+            InitializeTest();
+
+            Product testProduct = new Product()
+            {
+                Id = 1,
+                Price = 10
+            };
+            
+            testProduct.Discounts = new List<Discount>();
+
+            testProduct.Discounts.Add(new Discount()
+            {
+                StartDate = new DateTime(2015, 1, 10),
+                EndDate = new DateTime(2015, 1, 30),
+                DiscountPercentage = 20
+            });
+            
+            ProductVM CurrentProduct = new ProductVM(testProduct);
+
+
+            
+
+            //execute
+            double value = CurrentProduct.TotalPriceWithDiscount;
+
+            //test
+            //wordt weergegeven in de view
+            Assert.IsTrue(value == 8, "halo");
+            
+        }
+
         private AppieViewModel GenerateAppieViewModel(
             Mock<IRepository<Brand>> brandRepo,
             Mock<IRepository<Department>> departmentRepo,
