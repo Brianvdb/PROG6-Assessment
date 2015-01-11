@@ -193,7 +193,6 @@ namespace PROG6_Assessment.ViewModel
             set
             {
                 _filterProductTypeId = value;
-                Trace.WriteLine(_filterProductTypeId);
                 FilterProductList();
                 RaisePropertyChanged();
             }
@@ -210,7 +209,6 @@ namespace PROG6_Assessment.ViewModel
             set
             {
                 _filterDepartmentId = value;
-                Trace.WriteLine(_filterDepartmentId);
                 FilterProductList();
                 RaisePropertyChanged();
             }

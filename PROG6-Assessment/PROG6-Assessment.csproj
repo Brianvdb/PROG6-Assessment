@@ -117,7 +117,6 @@
     <Compile Include="RecipeList.xaml.cs">
       <DependentUpon>RecipeList.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Model\DummyProductRepository.cs" />
     <Compile Include="ShoppingList.xaml.cs">
       <DependentUpon>ShoppingList.xaml</DependentUpon>
     </Compile>
@@ -230,6 +229,9 @@
       <Project>{99401a64-5307-4e57-a6f8-64c0bacc7968}</Project>
       <Name>DomainModel</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Model\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
