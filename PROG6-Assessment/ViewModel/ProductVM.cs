@@ -175,6 +175,13 @@ namespace PROG6_Assessment.ViewModel
             IsNew = false;
         }
 
+        public void DiscountChanged()
+        {
+            OnPropertyChanged("CurrentDiscount");
+            OnPropertyChanged("DiscountPercentage");
+            OnPropertyChanged("TotalPriceWithDiscount");
+        }
+
         public event PropertyChangedEventHandler PropertyChanged;
 
         protected void OnPropertyChanged([CallerMemberName] string propertyName = "")

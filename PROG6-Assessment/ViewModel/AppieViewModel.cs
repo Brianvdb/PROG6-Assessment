@@ -757,6 +757,10 @@ namespace PROG6_Assessment.ViewModel
 
         private void SaveDiscount()
         {
+            if (CurrentDiscount == null)
+            {
+                return;
+            }
             if (CurrentDiscount.IsNew)
             {
                 this.discountRepository.Add(CurrentDiscount.Discount);
@@ -768,6 +772,14 @@ namespace PROG6_Assessment.ViewModel
             else
             {
                 this.discountRepository.Update();
+            }
+
+            foreach (ProductVM product in ProductShoppingVMList)
+            {
+                if (product.Id == CurrentListProduct.Id)
+                {
+                    product.DiscountChanged();
+                }
             }
 
             try
