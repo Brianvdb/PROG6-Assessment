@@ -537,7 +537,7 @@ namespace PROG6_Assessment.ViewModel
             {
                 foreach (Product p in this.productRepository.GetAll())
                 {
-                    if (p.Discounts.Where(d => d.Id == CurrentDepartment.Id).FirstOrDefault() != null)
+                    if (p.DepartmentId == CurrentDepartment.Id)
                     {
                         string message = "Je kan deze afdeling niet verwijderen omdat het gekoppeld is aan één of meerdere producten.";
                         string caption = "Fout";
