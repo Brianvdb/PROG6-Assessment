@@ -121,7 +121,7 @@ namespace PROG6_Assessment.ViewModel
                 {
                     return TotalPrice;
                 }
-                return Math.Round((TotalPrice * discount) / 100D, 2);
+                return Math.Round((TotalPrice * (100-discount)) / 100D, 2);
             }
         }
 
