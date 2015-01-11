@@ -14,6 +14,7 @@
         <StackPanel DockPanel.Dock="Bottom">
             <Button Command="{Binding EditDepartmentCommand}">Afdeling Bewerken</Button>
             <Button Command="{Binding AddDepartmentCommand}">Afdeling Toevoegen</Button>
+            <Button Command="{Binding DeleteDepartmentCommand}">Afdeling Verwijderen</Button>
         </StackPanel>
     </DockPanel>
 </Window>

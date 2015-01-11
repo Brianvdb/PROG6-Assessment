@@ -10,6 +10,5 @@
         <Button Command="{Binding OpenProductTypeList}">Product Types</Button>
         <Button Command="{Binding OpenDepartmentList}">Afdelingen</Button>
         <Button Command="{Binding OpenRecipeList}">Recepten</Button>
-        <Button Command="{Binding OpenDiscountList}">Kortingen</Button>
     </StackPanel>
 </Window>

@@ -19,10 +19,23 @@ namespace PROG6_Assessment
     /// </summary>
     public partial class DiscountEdit : Window
     {
+        private static Window _instance;
         public DiscountEdit()
         {
             WindowStartupLocation = System.Windows.WindowStartupLocation.CenterScreen;
             InitializeComponent();
+        }
+
+        public static Window Instance
+        {
+            get
+            {
+                if (_instance == null || !_instance.IsVisible)
+                {
+                    _instance = new DiscountEdit();
+                }
+                return _instance;
+            }
         }
     }
 }

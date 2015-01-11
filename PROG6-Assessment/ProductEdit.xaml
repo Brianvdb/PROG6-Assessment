@@ -44,21 +44,8 @@
         <Label Margin="0,0,20,0" Grid.Row="4" Grid.Column="0" >Standaart prijs:</Label>
             <TextBox Grid.Row="4" Grid.Column="1" Text="{Binding CurrentListProduct.Price}"></TextBox>
         </Grid>
-        
-        <Label Margin="0,10,0,0">Kortingen van toepassing op dit product:</Label>
-        <DataGrid AutoGenerateColumns="False" IsReadOnly="True" Margin="5">
-            <DataGrid.Columns>
-                <DataGridTextColumn Header="*" Width="10" />
-                <DataGridTextColumn Header="%" Width="10" />
-                <DataGridTextColumn Header="Code" Width="*" />
-                <DataGridTextColumn Header="Geldig van" Width="*" />
-                <DataGridTextColumn Header="Geldig tot" Width="*" />
-                <DataGridTextColumn Header="Nu" Width="30" />
-            </DataGrid.Columns>
-        </DataGrid>
-        
-        <Button>Verwijder geselecteerde korting van dit product</Button>
-        <Button>Korting toevoegen</Button>
+
+        <Button Command="{Binding ManageProductDiscountsCommand}">Beheer Kortingen</Button>
         
         <Button Margin="0,20,0,0" Grid.Row="4" Grid.Column="0" Command="{Binding SaveProductCommand}">Opslaan</Button>
         <Button Grid.Row="4" Grid.Column="1" Command="{Binding RemoveProductCommand}">Verwijderen</Button>

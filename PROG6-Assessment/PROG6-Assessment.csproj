@@ -124,6 +124,7 @@
     <Compile Include="ViewModel\AppieViewModel.cs" />
     <Compile Include="ViewModel\DepartmentVM.cs" />
     <Compile Include="ViewModel\BrandVM.cs" />
+    <Compile Include="ViewModel\DiscountVM.cs" />
     <Compile Include="ViewModel\ProductTypeVM.cs" />
     <Compile Include="ViewModel\ProductVM.cs" />
     <Compile Include="ViewModel\RecipeVM.cs" />

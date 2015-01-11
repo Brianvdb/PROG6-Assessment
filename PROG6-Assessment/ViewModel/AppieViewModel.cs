@@ -12,6 +12,7 @@ using System.Diagnostics;
 using System.IO;
 using System.Windows;
 using System.Windows.Input;
+using System.Linq;
 
 namespace PROG6_Assessment.ViewModel
 {
@@ -49,9 +50,8 @@ namespace PROG6_Assessment.ViewModel
         public ICommand AddDepartmentCommand { get; set; }
         public ICommand EditDepartmentCommand { get; set; }
         public ICommand SaveDepartmentCommand { get; set; }
-        public ICommand DeleteDepartmentComand { get; set; }
+        public ICommand DeleteDepartmentCommand { get; set; }
         public ICommand OpenRecipeList { get; set; }
-        public ICommand OpenDiscountList { get; set; }
         public ICommand OpenProductTypeList { get; set; }
         public ICommand OpenProductTypeEdit { get; set; }
         public ICommand OpenProductTypeEditAdd { get; set; }
@@ -70,6 +70,11 @@ namespace PROG6_Assessment.ViewModel
         public ICommand AddRecipeToShoppingListCommand { get; set; }
         public ICommand RemoveRecipeCommand { get; set; }
         public ICommand SaveReceiptCommand { get; set; }
+        public ICommand ManageProductDiscountsCommand { get; set; }
+        public ICommand AddDiscountCommand { get; set; }
+        public ICommand DeleteDiscountCommand { get; set; }
+        public ICommand EditDiscountCommand { get; set; }
+        public ICommand SaveDiscountCommand { get; set; }
 
         // view models
         private ProductTypeVM _productType;
@@ -170,6 +175,20 @@ namespace PROG6_Assessment.ViewModel
             }
         }
 
+        private DiscountVM _currentDiscount;
+        public DiscountVM CurrentDiscount
+        {
+            get
+            {
+                return _currentDiscount;
+            }
+            set
+            {
+                _currentDiscount = value;
+                RaisePropertyChanged();
+            }
+        }
+
         public double ShoppingListPrice
         {
             get
@@ -222,6 +241,7 @@ namespace PROG6_Assessment.ViewModel
         public ObservableCollection<RecipeVM> RecipeVMList { get; set; }
         public ObservableCollection<DepartmentVM> DepartmentVMList { get; set; }
         public ObservableCollection<ProductVM> ProductFilterVMList { get; set; }
+        public ObservableCollection<DiscountVM> DiscountVMList { get; set; }
 
         public AppieViewModel(IRepository<Brand> brandRepo, IRepository<Department> departmentRepo, IRepository<Discount> discountRepo, IRepository<Product> productRepo, IRepository<ProductType> productTypeRepo, IRepository<Recipe> recipeRepo)
         {
@@ -246,8 +266,7 @@ namespace PROG6_Assessment.ViewModel
             this.AddDepartmentCommand = new RelayCommand(OpenAddDepartmentWindow);
             this.EditDepartmentCommand = new RelayCommand(OpenEditDepartmentWindow);
             this.SaveDepartmentCommand = new RelayCommand<string>(name => SaveDepartment(name));
-            this.DeleteDepartmentComand = new RelayCommand(DeleteDepartment);
-            this.OpenDiscountList = new RelayCommand(OpenDiscountWindow);
+            this.DeleteDepartmentCommand = new RelayCommand(DeleteDepartment);
             this.OpenProductTypeList = new RelayCommand(OpenProductTypeWindow);
             this.OpenProductTypeEdit = new RelayCommand(OpenProductTypeEditWindow);
             this.OpenProductTypeEditAdd = new RelayCommand(OpenProductTypeListAddWindow);
@@ -266,7 +285,11 @@ namespace PROG6_Assessment.ViewModel
             this.AddRecipeToShoppingListCommand = new RelayCommand(AddRecipeToShoppingList);
             this.RemoveRecipeCommand = new RelayCommand(RemoveRecipe);
             this.SaveReceiptCommand = new RelayCommand(SaveReceipt);
-
+            this.ManageProductDiscountsCommand = new RelayCommand(OpenDiscountManagementWindow);
+            this.AddDiscountCommand = new RelayCommand(OpenDiscountAddWindow);
+            this.EditDiscountCommand = new RelayCommand(OpenDiscountEditWindow);
+            this.DeleteDiscountCommand = new RelayCommand(DeleteDiscount);
+            this.SaveDiscountCommand = new RelayCommand(SaveDiscount);
 
             // observable collections
             this.ProductTypeVMList = new ObservableCollection<ProductTypeVM>();
@@ -512,9 +535,9 @@ namespace PROG6_Assessment.ViewModel
         {
             if (CurrentDepartment != null && !CurrentDepartment.IsNew)
             {
-                foreach (Department p in this.departmentRepository.GetAll())
+                foreach (Product p in this.productRepository.GetAll())
                 {
-                    if (p.Id == CurrentDepartment.Id)
+                    if (p.Discounts.Where(d => d.Id == CurrentDepartment.Id).FirstOrDefault() != null)
                     {
                         string message = "Je kan deze afdeling niet verwijderen omdat het gekoppeld is aan één of meerdere producten.";
                         string caption = "Fout";
@@ -550,11 +573,6 @@ namespace PROG6_Assessment.ViewModel
                 DepartmentEdit.Instance.Close();
             }
             catch { }
-        }
-
-        private void OpenDiscountWindow()
-        {
-            DiscountList.Instance.Show();
         }
 
         private void OpenProductTypeWindow()
@@ -686,6 +704,75 @@ namespace PROG6_Assessment.ViewModel
             {
                 OpenProductWindow();
                 ProductEdit.Instance.Close();
+            }
+            catch { }
+        }
+
+        public void OpenDiscountManagementWindow()
+        {
+            
+            if (CurrentListProduct == null)
+            {
+                return;
+            }
+
+            DiscountVMList = new ObservableCollection<DiscountVM>() {};
+            CurrentListProduct.Product.Discounts.ForEach(d => DiscountVMList.Add(new DiscountVM(d)));
+            Console.WriteLine("Hoeveelheid: " + DiscountVMList.Count);
+
+            DiscountList.Instance.Show();
+        }
+
+        private void OpenDiscountAddWindow()
+        {
+            CurrentDiscount = new DiscountVM();
+            OpenDiscountEditWindow();
+        }
+
+        private void OpenDiscountEditWindow()
+        {
+            if (CurrentDiscount == null)
+            {
+                return;
+            }
+            DiscountList.Instance.Close();
+            DiscountEdit.Instance.Show();
+        }
+
+        private void DeleteDiscount()
+        {
+            if (CurrentDiscount != null && !CurrentDiscount.IsNew)
+            {
+                this.discountRepository.Delete(CurrentDiscount.Discount);
+                DiscountVMList.Remove(CurrentDiscount);
+                CurrentDiscount = null;
+            }
+
+            try
+            {
+                ProductEdit.Instance.Close();
+            }
+            catch { }
+        }
+
+        private void SaveDiscount()
+        {
+            if (CurrentDiscount.IsNew)
+            {
+                this.discountRepository.Add(CurrentDiscount.Discount);
+                CurrentDiscount.IsNew = false;
+                CurrentListProduct.Product.Discounts.Add(CurrentDiscount.Discount);
+                productRepository.Update();
+                DiscountVMList.Add(CurrentDiscount);
+            }
+            else
+            {
+                this.discountRepository.Update();
+            }
+
+            try
+            {
+                DiscountEdit.Instance.Close();
             }
             catch { }
         }
