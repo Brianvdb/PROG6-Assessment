@@ -41,7 +41,7 @@
 
         <Label Margin="0,0,20,0" Grid.Row="3" Grid.Column="0" >Product Naam:</Label>
             <TextBox Grid.Row="3" Grid.Column="1" Text="{Binding CurrentListProduct.ProductName}"></TextBox>
-        <Label Margin="0,0,20,0" Grid.Row="4" Grid.Column="0" >Standaart prijs:</Label>
+        <Label Margin="0,0,20,0" Grid.Row="4" Grid.Column="0" >Standaard prijs:</Label>
             <TextBox Grid.Row="4" Grid.Column="1" Text="{Binding CurrentListProduct.Price}"></TextBox>
         </Grid>
 
