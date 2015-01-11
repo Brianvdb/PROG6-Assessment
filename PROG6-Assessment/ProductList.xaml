@@ -18,7 +18,7 @@
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Product" Width="200" Binding="{Binding ProductName}" />
                 <DataGridTextColumn Header="Merk" Width="100" Binding="{Binding Brand.Name}" />
-                <DataGridTextColumn Header="Prijs" Width="*" Binding="{Binding Price}" />
+                <DataGridTextColumn Header="Prijs" Width="*" Binding="{Binding TotalPriceWithDiscount}" />
                 <DataGridTextColumn Header="Korting" Width="*" Binding="{Binding CurrentDiscount}"/>
             </DataGrid.Columns>
         </DataGrid>

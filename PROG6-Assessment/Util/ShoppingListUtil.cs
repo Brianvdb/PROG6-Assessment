@@ -74,7 +74,7 @@ namespace PROG6_Assessment.Util
                     cell.HorizontalAlignment = Element.ALIGN_LEFT;
                     table.AddCell(cell);
 
-                    cell = new PdfPCell(new Phrase(product.Price.ToString(), font));
+                    cell = new PdfPCell(new Phrase(product.TotalPriceWithDiscount.ToString(), font));
                     cell.Border = Rectangle.NO_BORDER;
                     cell.HorizontalAlignment = Element.ALIGN_RIGHT;
                     table.AddCell(cell);
