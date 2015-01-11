@@ -1,0 +1,13 @@
+﻿<Window x:Class="PROG6_Assessment.DepartmentEdit"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Afdelingen Berwerken / Opslaan" Height="300" Width="300"
+        DataContext="{Binding Source={StaticResource Locator}, Path=Appie}">
+    <StackPanel>
+        <StackPanel Orientation="Horizontal">
+            <Label Margin="0,3,20,0">Naam:</Label>
+            <TextBox Name="EditName" Margin="0,5,0,0" Width="310" Text="{Binding CurrentDepartment.Name, UpdateSourceTrigger=Explicit}" ></TextBox>
+        </StackPanel>
+        <Button Margin="0,20,0,0" Command="{Binding SaveDepartmentCommand}" CommandParameter="{Binding Text, ElementName=EditName}">Opslaan</Button>
+    </StackPanel>
+</Window>

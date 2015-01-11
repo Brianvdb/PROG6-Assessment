@@ -45,6 +45,10 @@ namespace PROG6_Assessment.ViewModel
         public ICommand SaveProductCommand { get; set; }
         public ICommand RemoveProductCommand { get; set; }
         public ICommand OpenDepartmentList { get; set; }
+        public ICommand AddDepartmentCommand { get; set; }
+        public ICommand EditDepartmentCommand { get; set; }
+        public ICommand SaveDepartmentCommand { get; set; }
+        public ICommand DeleteDepartmentComand { get; set; }
         public ICommand OpenRecipeList { get; set; }
         public ICommand OpenDiscountList { get; set; }
         public ICommand OpenProductTypeList { get; set; }
@@ -205,6 +209,10 @@ namespace PROG6_Assessment.ViewModel
             this.RemoveProductCommand = new RelayCommand(RemoveProduct);
             this.OpenRecipeList = new RelayCommand(OpenRecipeWindow);
             this.OpenDepartmentList = new RelayCommand(OpenDepartmentWindow);
+            this.AddDepartmentCommand = new RelayCommand(OpenAddDepartmentWindow);
+            this.EditDepartmentCommand = new RelayCommand(OpenEditDepartmentWindow);
+            this.SaveDepartmentCommand = new RelayCommand<string>(name => SaveDepartment(name));
+            this.DeleteDepartmentComand = new RelayCommand(DeleteDepartment);
             this.OpenDiscountList = new RelayCommand(OpenDiscountWindow);
             this.OpenProductTypeList = new RelayCommand(OpenProductTypeWindow);
             this.OpenProductTypeEdit = new RelayCommand(OpenProductTypeEditWindow);
@@ -582,6 +590,68 @@ namespace PROG6_Assessment.ViewModel
         private void OpenDepartmentWindow()
         {
             DepartmentList.Instance.Show();
+        }
+
+        private void OpenAddDepartmentWindow()
+        {
+            CurrentDepartment = new DepartmentVM();
+            OpenEditDepartmentWindow();
+        }
+
+        private void OpenEditDepartmentWindow()
+        {////
+            Console.WriteLine("halli halo");
+            
+            if (CurrentDepartment == null)
+            {
+                return;
+            }
+            DepartmentList.Instance.Close();
+            DepartmentEdit.Instance.Show();
+        }
+
+        private void DeleteDepartment()
+        {
+            if (CurrentDepartment != null && !CurrentDepartment.IsNew)
+            {
+                foreach (Department p in this.departmentRepository.GetAll())
+                {
+                    if (p.Id == CurrentDepartment.Id)
+                    {
+                        string message = "Je kan deze afdeling niet verwijderen omdat het gekoppeld is aan één of meerdere producten.";
+                        string caption = "Fout";
+                        MessageBoxButton buttons = MessageBoxButton.OK;
+                        MessageBoxImage icon = MessageBoxImage.Error;
+                        MessageBox.Show(message, caption, buttons, icon);
+                        return;
+                    }
+                }
+                this.departmentRepository.Delete(CurrentDepartment.Department);
+                DepartmentVMList.Remove(CurrentDepartment);
+                CurrentDepartment = null;
+            }
+        }
+
+        private void SaveDepartment(string name)
+        {
+            CurrentDepartment.Name = name;
+            if (CurrentDepartment.IsNew)
+            {
+                this.departmentRepository.Add(CurrentDepartment.Department);
+                CurrentDepartment.IsNew = false;
+                DepartmentVMList.Add(CurrentDepartment);
+            }
+            else
+            {
+                this.departmentRepository.Update();
+            }
+
+            try
+            {
+                OpenDepartmentWindow();
+                DepartmentEdit.Instance.Close();
+            }
+            catch { }
         }
 
         private void OpenDiscountWindow()

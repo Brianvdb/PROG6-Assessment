@@ -87,6 +87,9 @@
     <Compile Include="BrandList.xaml.cs">
       <DependentUpon>BrandList.xaml</DependentUpon>
     </Compile>
+    <Compile Include="DepartmentEdit.xaml.cs">
+      <DependentUpon>DepartmentEdit.xaml</DependentUpon>
+    </Compile>
     <Compile Include="DepartmentList.xaml.cs">
       <DependentUpon>DepartmentList.xaml</DependentUpon>
     </Compile>
@@ -134,6 +137,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="BrandList.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="DepartmentEdit.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
