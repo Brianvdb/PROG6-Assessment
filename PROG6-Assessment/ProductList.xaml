@@ -5,15 +5,15 @@
         DataContext="{Binding Source={StaticResource Locator}, Path=Appie}">
     <DockPanel>
         <StackPanel DockPanel.Dock="Top" Orientation="Horizontal">
-            <Label>Filter op Merk</Label>
-            <ComboBox MinWidth="150" SelectedIndex="0" ItemsSource="{Binding BrandVMList}" DisplayMemberPath="Name" SelectedValuePath="Id" />
+            <Label>Selecteer Product</Label>
+            <ComboBox MinWidth="150" SelectedIndex="0" ItemsSource="{Binding ProductTypeVMList}" DisplayMemberPath="Name" SelectedValuePath="Id" SelectedValue="{Binding FilterProductTypeId, Mode=TwoWay}"/>
 
-            <Label>Filter op Afdeling</Label>
-            <ComboBox MinWidth="150" SelectedIndex="0" ItemsSource="{Binding DepartmentVMList}" DisplayMemberPath="Name" SelectedValuePath="Id" />
+            <Label>Selecteer Afdeling</Label>
+            <ComboBox MinWidth="130" SelectedIndex="0" ItemsSource="{Binding DepartmentVMList}" DisplayMemberPath="Name" SelectedValuePath="Id" SelectedValue="{Binding FilterDepartmentId, Mode=TwoWay}"/>
 
         </StackPanel>
         <TextBlock DockPanel.Dock="Top" Text="Appie Producten" FontSize="28" TextAlignment="Center"/>
-        <DataGrid DockPanel.Dock="Top" AutoGenerateColumns="False" IsReadOnly="True" Margin="5" ItemsSource="{Binding ProductVMList}" SelectedItem="{Binding CurrentListProduct}">
+        <DataGrid DockPanel.Dock="Top" AutoGenerateColumns="False" IsReadOnly="True" Margin="5" ItemsSource="{Binding ProductFilterVMList}" SelectedItem="{Binding CurrentListProduct}">
             
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Product" Width="200" Binding="{Binding ProductName}" />

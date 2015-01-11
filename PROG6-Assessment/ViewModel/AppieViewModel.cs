@@ -182,12 +182,47 @@ namespace PROG6_Assessment.ViewModel
             }
         }
 
+        private int _filterProductTypeId;
+
+        public int FilterProductTypeId
+        { 
+            get
+            {
+                return _filterProductTypeId;
+            }
+            set
+            {
+                _filterProductTypeId = value;
+                Trace.WriteLine(_filterProductTypeId);
+                FilterProductList();
+                RaisePropertyChanged();
+            }
+        }
+
+        private int _filterDepartmentId;
+
+        public int FilterDepartmentId
+        {
+            get
+            {
+                return _filterDepartmentId;
+            }
+            set
+            {
+                _filterDepartmentId = value;
+                Trace.WriteLine(_filterDepartmentId);
+                FilterProductList();
+                RaisePropertyChanged();
+            }
+        }
+
         public ObservableCollection<ProductTypeVM> ProductTypeVMList { get; set; }
         public ObservableCollection<ProductVM> ProductVMList { get; set; }
         public ObservableCollection<ProductVM> ProductShoppingVMList { get; set; }
         public ObservableCollection<BrandVM> BrandVMList { get; set; }
         public ObservableCollection<RecipeVM> RecipeVMList { get; set; }
         public ObservableCollection<DepartmentVM> DepartmentVMList { get; set; }
+        public ObservableCollection<ProductVM> ProductFilterVMList { get; set; }
 
         public AppieViewModel(IRepository<Brand> brandRepo, IRepository<Department> departmentRepo, IRepository<Discount> discountRepo, IRepository<Product> productRepo, IRepository<ProductType> productTypeRepo, IRepository<Recipe> recipeRepo)
         {
@@ -244,12 +279,15 @@ namespace PROG6_Assessment.ViewModel
             this.RecipeVMList = new ObservableCollection<RecipeVM>();
             this.DepartmentVMList = new ObservableCollection<DepartmentVM>();
             this.DepartmentVMList.Add(new DepartmentVM() { Name = "Geen" });
+            this.ProductFilterVMList = new ObservableCollection<ProductVM>();
 
             this.productTypeRepository.GetAll().ForEach(p => ProductTypeVMList.Add(new ProductTypeVM(p)));
             this.productRepository.GetAll().ForEach(p => ProductVMList.Add(new ProductVM(p)));
             this.brandRepository.GetAll().ForEach(b => BrandVMList.Add(new BrandVM(b)));
             this.recipeRepository.GetAll().ForEach(r => RecipeVMList.Add(new RecipeVM(r)));
             this.departmentRepository.GetAll().ForEach(d => DepartmentVMList.Add(new DepartmentVM(d)));
+
+            FilterProductList();
 
             //Trace.WriteLine("PRODUCT TYPES: " + ProductTypeVMList.Count);
 
@@ -285,6 +323,21 @@ namespace PROG6_Assessment.ViewModel
             };
 
             this.productRepository.Add(product);*/
+        }
+
+        private void FilterProductList()
+        {
+            int departmentId = FilterDepartmentId;
+            int productTypeId = FilterProductTypeId;
+
+            ProductFilterVMList.Clear();
+            foreach (ProductVM p in ProductVMList)
+            {
+                if ((departmentId == 0 || p.Product.DepartmentId == departmentId) && (productTypeId == 0 || p.Product.ProductTypeId == productTypeId))
+                {
+                    ProductFilterVMList.Add(p);
+                }
+            }
         }
 
         private void SaveReceipt()
@@ -764,6 +817,8 @@ namespace PROG6_Assessment.ViewModel
                 this.productRepository.Update();
             }
 
+            FilterProductList();
+
             try
             {
                 OpenProductWindow();
@@ -778,6 +833,7 @@ namespace PROG6_Assessment.ViewModel
             {
                 this.productRepository.Delete(CurrentListProduct.Product);
                 ProductVMList.Remove(CurrentListProduct);
+                FilterProductList();
                 CurrentListProduct = null;
             }
 
