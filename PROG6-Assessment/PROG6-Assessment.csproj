@@ -120,6 +120,7 @@
     <Compile Include="ShoppingList.xaml.cs">
       <DependentUpon>ShoppingList.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Util\ShoppingListUtil.cs" />
     <Compile Include="ViewModel\AppieViewModel.cs" />
     <Compile Include="ViewModel\DepartmentVM.cs" />
     <Compile Include="ViewModel\BrandVM.cs" />
